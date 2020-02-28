@@ -1,0 +1,91 @@
+/* CSS for tic_tac_toe */
+
+/* ----------------------------------- */
+/* .line{*/
+/*width: 112px;*/
+/*height: 47px;*/
+/*border-bottom: 10px solid black;*/
+/*position: absolute;*/
+/*}*/
+
+
+/* ----------------------------------- */
+.grid {
+    background-color: darkslategray;
+    display: grid;
+    width: 20em;
+    height: 20em;
+    grid-gap: 0.5em;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-content: end; /* removes left padding when width isn't evenly divided */
+    margin: auto;
+}
+
+.grid > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+
+/* ----------------------------------- */
+#circle:before {
+    content: "\2B55";
+    font-size: 4em;
+    color: transparent;
+    text-shadow: 0 0 0 indianred;
+}
+
+#cross:before {
+    content: "\274C";
+    font-size: 4em;
+    color: transparent;
+    text-shadow: 0 0 0 mediumseagreen;
+}
+
+
+/* ----------------------------------- */
+.win {
+    color: darkslategray;
+}
+
+.loss {
+    color: crimson;
+}
+
+.input_block {
+    height: 30em;
+}
+
+a:link, a:visited {
+    color: darkslategray;
+    text-decoration: none;
+}
+
+a:active, a:hover {
+    color: crimson;
+    text-decoration: none;
+}
+
+/* ----------------------------------- */
+body {
+    color: darkslategray;
+    background-color: whitesmoke;
+    font-family: Copperplate, sans-serif;
+    text-align: center;
+    align-items: center;
+}
+
+h2 {
+    height: 1em;
+}
+
+strong {
+    height: 1em;
+}
+
+input {
+   text-align: center;
+}

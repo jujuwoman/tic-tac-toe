@@ -1,0 +1,37 @@
+<!–- initial game state -–>
+{% extends 'tic_tac_toe/base.html' %}
+{% block content %}
+    <h2>It's Player {{ currentPlayer }}'s turn.</h2>
+    <br>
+    <br>
+
+{#    <!–- form where player enters name -–>#}
+{#    <form method="post" novalidate>#}
+{#        {% csrf_token %}#}
+{#        {{ form }}#}
+{#        <button type="submit">Submit</button>#}
+{#    </form>#}
+
+    <div id="cell_ids"></div>
+
+    <script>
+        window.onload = makeAjaxCallGrid;
+        function makeAjaxCallGrid() {
+            jQuery.ajax({
+                type: "GET",
+                url: "{% url 'getCellIds' %}",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                success: function (data) {
+                    $.each(data, function(index, value) {
+                        $(value).appendTo($("#cells"));
+                    })
+                },
+                error: function (data) {
+                    alert("Error response:\n" + data);
+                }
+            });
+        }
+    </script>
+{% endblock %}

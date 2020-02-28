@@ -1,0 +1,87 @@
+<!–- page displayed when game is in session -–>
+{% extends 'tic_tac_toe/index.html' %}
+{% block content %}
+    <h2>It's Player <span id="nextPlayer">0</span>'s turn.</h2>
+    <br><br><br>
+{#        <br><br><br>#}
+{#    <div id="cell_ids"></div>#}
+
+    {#This belongs to base.html#}
+    {# ------------------------------------------------ #}
+    <div class='grid' id="cells"></div>
+    <script>
+        window.onload = makeAjaxCallGrid;
+        function makeAjaxCallGrid() {
+            jQuery.ajax({
+                type: "GET",
+                url: "{% url 'getCellIds' %}",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                success: function (data) {
+                    $.each(data, function(index, value) {
+                        $(value).appendTo($("#cells"));
+                    })
+                },
+                error: function (data) {
+                    alert("Error response:\n" + data);
+                }
+            });
+        }
+    </script>
+
+    {# ------------------------------------------------ #}
+    <script>
+        var marks = ["cross", "circle"];
+
+        function makeMark(playerId, cellId) {
+            var html = '<div id=mark></div>';
+            var mark = marks[playerId];
+            document.getElementById(cellId).outerHTML = html.replace('mark', mark);
+        }
+
+        function makePrompt(nextPlayer) {
+            document.getElementById("nextPlayer").innerHTML = nextPlayer;
+        }
+
+        function makeAjaxCall(cellId) {
+            $.ajax({
+                type: "GET",
+                url: "{% url 'getCurrentPlayer' %}",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                success: function (data) {
+                    makeMark(data.currentPlayer, cellId);
+                    makePrompt(data.nextPlayer);
+                },
+                error: function (data) {
+                    alert("Error response:\n" + data);
+                }
+            });
+        }
+    </script>
+
+
+    {# ------------------------------------------------ #}
+    <div onclick="getDb()" id="db">DB</div>
+    <script>
+        function getDb() {
+            jQuery.ajax({
+                type: "GET",
+                url: "{% url 'showModels' %}",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                success: function (data) {
+                    jQuery("#db").html(data);
+                },
+                error: function (data) {
+                    alert('error');
+                    alert("Error response:\n" + data);
+                }
+            });
+        }
+    </script>
+
+{% endblock %}
