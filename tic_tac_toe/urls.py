@@ -18,14 +18,14 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # path('progress2/', views.progress2, name='progress2'),
+    # path('getCellId/', views.getCellId, name='getCellId'),
+    # path('showModels/', views.showModels, name='showModels'),
     path('', views.index, name='index'),
     path('session/', views.session, name='session'),
-    # path('progress2/', views.progress2, name='progress2'),
-    path('getCurrentPlayer/', views.getCurrentPlayer, name='getCurrentPlayer'),
+    path('make_move/', views.make_move, name='make_move'),
     path('getNextPlayer/', views.getNextPlayer, name='getNextPlayer'),
     path('getCellIds/', views.getCellIds, name='getCellIds'),
-    path('getCellId/', views.getCellId, name='getCellId'),
-    path('showModels/', views.showModels, name='showModels'),
     path('gg/', views.gg, name='gg'),
     path('admin/', admin.site.urls)
 ]

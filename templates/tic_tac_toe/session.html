@@ -44,30 +44,10 @@
             document.getElementById("nextPlayer").innerHTML = nextPlayer;
         }
 
-        function processCellAjax(cellId) {
-            $.ajax({
-                type: "POST",
-                url: "{% url 'getCellId' %}",
-                headers: {
-                    "X-CSRFToken": "{{ csrf_token }}"
-                },
-                data: {
-                    "cellId": cellId
-                },
-                success: function (data) {
-                    {#alert("Success response:\n" + data);#}
-                },
-                error: function (data) {
-                    {#alert("Error response:\n" + data);#}
-                    window.location.href = "{% url 'gg' %}";
-                }
-            });
-        }
-
         function makeAjaxCall(cellId) {
             $.ajax({
                 type: "POST",
-                url: "{% url 'getCurrentPlayer' %}",
+                url: "{% url 'make_move' %}",
                 headers: {
                     "X-CSRFToken": "{{ csrf_token }}"
                 },
@@ -81,6 +61,7 @@
                 },
                 error: function (data) {
                     alert("Error response:\n" + data);
+                    window.location.href = "{% url 'gg' %}";
                 }
             });
         }

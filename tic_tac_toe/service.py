@@ -9,7 +9,7 @@ from . models import Players
 
 
 
-def ifWin(player, cellId):
+def if_win(player, cellId):
 
     [row, col] = list(map(int, cellId.split('_')))
 
@@ -23,5 +23,7 @@ def ifWin(player, cellId):
 
     return config.N in {player.rows[row], player.cols[col], player.major, player.minor}
 
-def ifDraw(request):
-    return request.sessionp['moves'] == config.N ** config.DIMENSIONS
+
+def if_draw(player, cellId):
+    return False
+    # return request.sessionp['moves'] == config.N ** config.DIMENSIONS

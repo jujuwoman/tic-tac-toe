@@ -27,56 +27,6 @@ def index(request):
     Players.objects.create(name=0)
     Players.objects.create(name=1)
 
-    # player0 = Players.objects.create(name=0)
-    # player1 = Players.objects.create(name=1)
-
-    # rows = []
-    # cols = []
-    # major = []
-    # minor = []
-    # for i in range(config.N):
-    #     rows.append(0)
-    #     cols.append(0)
-    #     major.append(0)
-    #     minor.append(0)
-
-    # rows = {}
-    # cols = {}
-    # major = {}
-    # minor = {}
-    # for i in range(config.N):
-    #     rows[i] = 0
-    #     cols[i] = 0
-    #     major[i] = 0eieecchtccijlgjjgkevgcgltutcjrgkdkttenhnfiuh
-
-    #     minor[i] = 0
-    # player0 = Players.objects.create(name=0, rows=rows, cols=cols)
-    # player1 = Players.objects.create(name=1, rows=rows, cols=cols)
-    # player0 = Players.objects.create(name=0, rows=rows, cols=cols, major=major, minor=minor)
-    # player1 = Players.objects.create(name=1, rows=rows, cols=cols, major=major, minor=minor)
-
-        # player0.rows.append(0)
-        # player0.rows.append(0)
-        # player0.minor.append(0)
-        # player0.major.append(0)
-
-    # player1 = Players.objects.create(name=1, rows=rows, cols=cols, major=major, minor=minor)
-    # for i in range(config.N):
-    #     player1.rows.append(0)
-    #     player1.rows.append(0)
-    #     player1.minor.append(0)
-    #     player1.major.append(0)
-
-
-    # starter = 0
-    # request.session['map'] = [[-1] * 3] * 3
-    # request.session['markedRows'] = set()
-    # request.session['markedCols'] = set()
-    request.session['player1'] = []
-    request.session['player2'] = []
-    request.session['currentPlayer'] = starter
-    request.session['testAjax'] = starter
-    request.session['moves'] = 0
     return HttpResponseRedirect('session')
 
     # if request.method == 'POST':
@@ -95,22 +45,29 @@ def index(request):
     #                   'currentPlayer': starter
     #               })
 
-# # in-session game behavior
-# # fetch current player
-# def progress2(request):
-#     response = request.session['moves'] % 2
-#     request.session['moves'] += 1
-#     return HttpResponse(response)
 
-def getCurrentPlayer(request):
+def make_move(request):
+
+    # get current player, mebbe save this info to model and call from service
     currentPlayer = request.session['moves'] % config.NUMBER_OF_PLAYERS
     request.session['moves'] += 1
     nextPlayer = request.session['moves'] % config.NUMBER_OF_PLAYERS
-    response = {
-        "currentPlayer": currentPlayer,
-        "nextPlayer": nextPlayer
-    }
-    return JsonResponse(response)
+
+    name = currentPlayer
+    player = Players.objects.get(name=name)
+    cellId = request.POST['cellId']
+
+    if service.if_win(player, cellId):
+        return HttpResponseRedirect('gg')
+    elif service.if_draw(player, cellId):
+        return HttpResponseRedirect('gg')
+    else:
+        response = {
+            "currentPlayer": currentPlayer,
+            "nextPlayer": nextPlayer
+        }
+        return JsonResponse(response)
+
 
 def getNextPlayer(request):
     request.session['moves'] += 1
@@ -122,49 +79,15 @@ def getCellIds(request):
     for i in range(config.ROWS):
         for j in range(config.COLUMNS):
             cell = "{}_{}".format(i, j)
-            html = "<div onclick=\"processCellAjax(\'{0}\'); makeAjaxCall(\'{0}\');\" id=\"{0}\"></div>".format(cell)
+            html = "<div onclick=\"makeAjaxCall(\'{0}\');\" id=\"{0}\"></div>".format(cell)
             response.append(html)
     return JsonResponse(response, safe=False)
-
-def getCellId(request):
-    # if request.session['currentPlayer'] == 0:
-    #     request.session['currentPlayer'] = 1
-    # else:
-    #     request.session['currentPlayer'] = 0
-    name = request.session['currentPlayer']
-    player = Players.objects.get(name=name)
-    cellId = request.POST['cellId']
-    response = [cellId]
-    if service.ifWin(player, cellId):
-        return HttpResponseRedirect('gg')
-    else:
-        return JsonResponse(response, safe=False)
-
-# # in-session game behavior
-# def progress2(request):
-#     # return render(request, 'tic_tac_toe/progress2.html')
-#     if request.session['currentPlayer'] == 0:
-#         request.session['currentPlayer'] = 1
-#     else:
-#         request.session['currentPlayer'] = 0
-#     reponse = request.session['currentPlayer']
-#     return HttpResponse(reponse)
-
-# # in-session game behavior
-# def progress2(request):
-#     # return render(request, 'tic_tac_toe/progress2.html')
-#
-#     reponse = request.session['currentPlayer']
-#     return HttpResponse(reponse)
-
-def showModels(request):
-    response = Players.objects.all()
-    return HttpResponse(response)
 
 
 def makeMark(request):
     response = '<div id=circle></div>'
     return HttpResponse(response)
+
 
 def session(request):
     # if request.method == 'POST':
@@ -172,15 +95,12 @@ def session(request):
     #     if form.is_valid():
     #         service.process_player_input(request)
     #         if request.session['result']:
-    #             return HttpResponseRedirect('/game_over')
+    #             return HttpResponseRedirect('/gg')
 
     if request.session['currentPlayer'] == 0:
         request.session['currentPlayer'] = 1
     else:
         request.session['currentPlayer'] = 0
-
-    # return render(request, 'tic_tac_toe/progress2.html')
-
 
     return render(request, 'tic_tac_toe/session.html',
                   {
@@ -190,6 +110,20 @@ def session(request):
                       # 'testAjax': request.POST.get('currentPlayer'),
                       # 'currentPlayer': request.POST.get('currentPlayer')
                       'currentPlayer': request.session['currentPlayer']
+                  })
+
+
+def gg(request):
+    # result = request.session['result']
+    # if result == 1:
+    #     message = config.WINNING_MESSAGE
+    # else:
+    #     message = config.LOSING_MESSAGE
+
+    return render(request, 'tic_tac_toe/gg.html',
+                  {
+                      # 'result': result,
+                      # 'message': message,
                   })
 
 # def index(request):
@@ -246,19 +180,27 @@ def session(request):
 #                   })
 #
 # display appropriate game over message
-def gg(request):
-    # result = request.session['result']
-    # if result == 1:
-    #     message = config.WINNING_MESSAGE
-    # else:
-    #     message = config.LOSING_MESSAGE
 
-    return render(request, 'tic_tac_toe/gg.html',
-                  {
-                      # 'word': request.session['word'],
-                      # 'progress': request.session['progress'],
-                      # 'result': result,
-                      # 'message': message,
-                      # 'incorrect_guesses': request.session['incorrect_guesses'],
-                      # 'free_guesses_remaining': request.session['free_guesses_remaining']
-                  })
+# # in-session game behavior
+# # fetch current player
+# def progress2(request):
+#     response = request.session['moves'] % 2
+#     request.session['moves'] += 1
+#     return HttpResponse(response)
+
+
+# def getCellId(request):
+#     # if request.session['currentPlayer'] == 0:
+#     #     request.session['currentPlayer'] = 1
+#     # else:
+#     #     request.session['currentPlayer'] = 0
+#     name = request.session['currentPlayer']
+#     player = Players.objects.get(name=name)
+#     cellId = request.POST['cellId']
+#     response = [cellId]
+#     if service.if_win(player, cellId):
+#         return HttpResponseRedirect('gg')
+#     else:
+#         return JsonResponse(response, safe=False)
+
+# html = "<div onclick=\"processCellAjax(\'{0}\'); makeAjaxCall(\'{0}\');\" id=\"{0}\"></div>".format(cell)
