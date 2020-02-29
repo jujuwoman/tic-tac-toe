@@ -44,13 +44,37 @@
             document.getElementById("nextPlayer").innerHTML = nextPlayer;
         }
 
+        function processCellAjax(cellId) {
+            $.ajax({
+                type: "POST",
+                url: "{% url 'getCellId' %}",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                data: {
+                    "cellId": cellId
+                },
+                success: function (data) {
+                    {#alert("Success response:\n" + data);#}
+                },
+                error: function (data) {
+                    {#alert("Error response:\n" + data);#}
+                    window.location.href = "{% url 'gg' %}";
+                }
+            });
+        }
+
         function makeAjaxCall(cellId) {
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: "{% url 'getCurrentPlayer' %}",
                 headers: {
                     "X-CSRFToken": "{{ csrf_token }}"
                 },
+                data: {
+                    "cellId": cellId
+                },
+                dataType: 'json',
                 success: function (data) {
                     makeMark(data.currentPlayer, cellId);
                     makePrompt(data.nextPlayer);
@@ -64,24 +88,24 @@
 
 
     {# ------------------------------------------------ #}
-    <div onclick="getDb()" id="db">DB</div>
-    <script>
-        function getDb() {
-            jQuery.ajax({
-                type: "GET",
-                url: "{% url 'showModels' %}",
-                headers: {
-                    "X-CSRFToken": "{{ csrf_token }}"
-                },
-                success: function (data) {
-                    jQuery("#db").html(data);
-                },
-                error: function (data) {
-                    alert('error');
-                    alert("Error response:\n" + data);
-                }
-            });
-        }
-    </script>
+{#    <div onclick="getDb()" id="db">DB</div>#}
+{#    <script>#}
+{#        function getDb() {#}
+{#            jQuery.ajax({#}
+{#                type: "GET",#}
+{#                url: "{% url 'showModels' %}",#}
+{#                headers: {#}
+{#                    "X-CSRFToken": "{{ csrf_token }}"#}
+{#                },#}
+{#                success: function (data) {#}
+{#                    jQuery("#db").html(data);#}
+{#                },#}
+{#                error: function (data) {#}
+{#                    alert('error');#}
+{#                    alert("Error response:\n" + data);#}
+{#                }#}
+{#            });#}
+{#        }#}
+{#    </script>#}
 
 {% endblock %}

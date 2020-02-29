@@ -1,4 +1,12 @@
+from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields import JSONField
+
 from django.db import models
+
+# -------------------------------------------------------- #
+# custom modules
+# -------------------------------------------------------- #
+from . import config
 
 
 class Roster(models.Model):
@@ -26,8 +34,16 @@ class GameState(models.Model):
         return self.turn
 
 
+def get_default_array():
+    return [config.BASE_COUNTER_VALUE] * config.N
+
+
 class Players(models.Model):
     name = models.CharField(max_length=255)
+    rows = JSONField(default=get_default_array)
+    cols = JSONField(default=get_default_array)
+    major = models.IntegerField(default=config.BASE_COUNTER_VALUE)
+    minor = models.IntegerField(default=config.BASE_COUNTER_VALUE)
 
     def __str__(self):
         return self.name

@@ -1,22 +1,27 @@
 import requests
 from django.db import models
 
-def player_input(request):
-    coordinates = request.POST['coordinates']
-    return
+# -------------------------------------------------------- #
+# custom modules
+# -------------------------------------------------------- #
+from . import config
+from . models import Players
 
-def ifWin(request):
 
-    # player = request.POST.get('player')
-    # [row, col] = request.POST...split('_')
+
+def ifWin(player, cellId):
+
+    [row, col] = list(map(int, cellId.split('_')))
 
     player.rows[row] += 1
     player.cols[col] += 1
     if row == col:
-        player.minor[row] += 1
-    if row + col == config.N:
-        player.major[row] += 1
-    return config.N in {player.rows[row], player.cols[col], player.minor[row], player.major[row]}
+        player.major += 1
+    if row + col == config.N - 1:
+        player.minor += 1
+    player.save()
+
+    return config.N in {player.rows[row], player.cols[col], player.major, player.minor}
 
 def ifDraw(request):
     return request.sessionp['moves'] == config.N ** config.DIMENSIONS

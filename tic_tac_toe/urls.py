@@ -19,12 +19,13 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('progress/', views.progress, name='progress'),
+    path('session/', views.session, name='session'),
     # path('progress2/', views.progress2, name='progress2'),
     path('getCurrentPlayer/', views.getCurrentPlayer, name='getCurrentPlayer'),
     path('getNextPlayer/', views.getNextPlayer, name='getNextPlayer'),
     path('getCellIds/', views.getCellIds, name='getCellIds'),
+    path('getCellId/', views.getCellId, name='getCellId'),
     path('showModels/', views.showModels, name='showModels'),
-    # path('game_over/', views.game_over, name='game_over'),
+    path('gg/', views.gg, name='gg'),
     path('admin/', admin.site.urls)
 ]

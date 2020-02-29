@@ -6,6 +6,7 @@ ROWS = 3
 COLUMNS = 3
 N = 3
 DIMENSIONS = 2
+BASE_COUNTER_VALUE = 0
 
 WINNING_MESSAGE = 'Congratulations, you won!'
 LOSING_MESSAGE = 'Sorry, you lost...'

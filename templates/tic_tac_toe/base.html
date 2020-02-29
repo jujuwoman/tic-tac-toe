@@ -27,27 +27,27 @@
     {% endblock %}
     </div>
 
-    <div class='grid' id="cells"></div>
-    <script>
-        window.onload = makeAjaxCallGrid;
-        function makeAjaxCallGrid() {
-            jQuery.ajax({
-                type: "GET",
-                url: "{% url 'getCellIds' %}",
-                headers: {
-                    "X-CSRFToken": "{{ csrf_token }}"
-                },
-                success: function (data) {
-                    $.each(data, function(index, value) {
-                        $(value).appendTo($("#cells"));
-                    })
-                },
-                error: function (data) {
-                    alert("Error response:\n" + data);
-                }
-            });
-        }
-    </script>
+{#    <div class='grid' id="cells"></div>#}
+{#    <script>#}
+{#        window.onload = makeAjaxCallGrid;#}
+{#        function makeAjaxCallGrid() {#}
+{#            jQuery.ajax({#}
+{#                type: "GET",#}
+{#                url: "{% url 'getCellIds' %}",#}
+{#                headers: {#}
+{#                    "X-CSRFToken": "{{ csrf_token }}"#}
+{#                },#}
+{#                success: function (data) {#}
+{#                    $.each(data, function(index, value) {#}
+{#                        $(value).appendTo($("#cells"));#}
+{#                    })#}
+{#                },#}
+{#                error: function (data) {#}
+{#                    alert("Error response:\n" + data);#}
+{#                }#}
+{#            });#}
+{#        }#}
+{#    </script>#}
 
 
 {#    <br>#}

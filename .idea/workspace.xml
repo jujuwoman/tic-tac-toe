@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="71567c3f-4022-4e8d-b5af-84902f5408dd" name="Default Changelist" comment="" />
+    <list default="true" id="71567c3f-4022-4e8d-b5af-84902f5408dd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tic_tac_toe/migrations/0007_auto_20200229_1916.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/session.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/session.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tic_tac_toe/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/tic_tac_toe/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tic_tac_toe/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tic_tac_toe/models.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,12 +24,7 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="db" type="feb32156:DbDataSourceImpl" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
@@ -40,6 +41,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
     <exe-path />
@@ -47,6 +51,9 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1Y8I10xehJUVRzan0wlNHOBTBNE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -54,8 +61,10 @@
     <option name="sortByType" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="list.type.of.created.stylesheet" value="Sass" />
     <property name="node.js.detected.package.jscs" value="true" />
@@ -79,6 +88,7 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="tic_tac_toe.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -108,26 +118,66 @@
       <option name="presentableId" value="Default" />
       <updated>1582317575512</updated>
       <workItem from="1582317593305" duration="22000" />
-      <workItem from="1582317644795" duration="119871000" />
+      <workItem from="1582317644795" duration="156119000" />
+      <workItem from="1583001685246" duration="2808000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="179" y="160" key="#xdebugger.evaluate" timestamp="1582946590327">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="179" y="160" key="#xdebugger.evaluate/0.0.1440.900@0.0.1440.900" timestamp="1582946590327" />
     <state x="37" y="235" key="EditFileWatcherDialog" timestamp="1582337512364">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="37" y="235" key="EditFileWatcherDialog/0.0.1440.900@0.0.1440.900" timestamp="1582337512364" />
+    <state width="886" height="294" key="GridCell.Tab.0.bottom" timestamp="1583003791840">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="886" height="294" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583003791840" />
+    <state width="886" height="294" key="GridCell.Tab.0.center" timestamp="1583003791838">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="886" height="294" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1583003791838" />
+    <state width="886" height="294" key="GridCell.Tab.0.left" timestamp="1583003791837">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="886" height="294" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1583003791837" />
+    <state width="886" height="294" key="GridCell.Tab.0.right" timestamp="1583003791838">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="886" height="294" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1583003791838" />
+    <state width="886" height="294" key="GridCell.Tab.1.bottom" timestamp="1583003791746">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="886" height="294" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583003791746" />
+    <state width="886" height="294" key="GridCell.Tab.1.center" timestamp="1583003791745">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="886" height="294" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1583003791745" />
+    <state width="886" height="294" key="GridCell.Tab.1.left" timestamp="1583003791744">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="886" height="294" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1583003791744" />
+    <state width="886" height="294" key="GridCell.Tab.1.right" timestamp="1583003791745">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="886" height="294" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1583003791745" />
     <state width="239" height="457" key="HiddenNamespacesPopup" timestamp="1582521885321">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="239" height="457" key="HiddenNamespacesPopup/0.0.1440.900@0.0.1440.900" timestamp="1582521885321" />
-    <state x="0" y="89" key="SettingsEditor" timestamp="1582455598970">
+    <state x="0" y="89" key="SettingsEditor" timestamp="1582922857477">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="0" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1582455598970" />
+    <state x="0" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1582922857477" />
     <state x="122" y="85" width="683" height="729" key="find.popup" timestamp="1582510898457">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -136,6 +186,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="129" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1582697730090" />
+    <state x="194" y="359" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1582922929567">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="194" y="359" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1440.900@0.0.1440.900" timestamp="1582922929567" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -146,6 +200,13 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
 </project>
