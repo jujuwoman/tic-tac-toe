@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load static %}
 
+
 <head>
     <title>tic-tac-toe</title>
     <link rel="stylesheet" href="{% static 'tic_tac_toe/tic_tac_toe.css' %}">
@@ -9,23 +10,33 @@
     <script src="{% static 'tic_tac_toe/tic_tac_toe.js' %}"></script>
 </head>
 
+
 <body>
     <!–- game header -–>
     <h1>Tic-Tac-Toe</h1>
-    <br><br><br><br>
+    <br style="line-height:5;">
 
-{#    <!–- answer word and player progress -–>#}
-{#    Your word is...#}
-{#    <h2>Your move, {{ current_player }}. </h2>#}
-
-    <!–- player input and result -–>
-    <div class="input_block">
-    {% block content %}
+    <!–- prompt message -–>
+    <h2>
+    {% block prompt %}
     {% endblock %}
+    </h2>
+    <br style="line-height:5;">
 
-    {% block progress %}
+    <!–- grid where player makes move -–>
+    {% block grid %}
     {% endblock %}
-    </div>
+    <br style="line-height:5;">
+
+    <!–- reset button -–>
+    <a href="{% url 'index' %}">Reset</a>
+    <br style="line-height:5;">
+
+    <!–- historical data -–>
+    {% block history %}
+    {% endblock %}
+</body>
+
 
 {#    <div class='grid' id="cells"></div>#}
 {#    <script>#}
@@ -49,53 +60,10 @@
 {#        }#}
 {#    </script>#}
 
-
-{#    <br>#}
-{#    <div class='grid' id="cells"></div>#}
-{##}
-{#    <script>#}
-{#        window.onload=makeAjaxCallGrid;#}
-{#        function makeAjaxCallGrid() {#}
-{#            jQuery.ajax({#}
-{#                type: "GET",#}
-{#                url: "{% url 'getCellIds' %}",#}
-{#                headers: {#}
-{#                    "X-CSRFToken": "{{ csrf_token }}"#}
-{#                },#}
-{#                success: function (data) {#}
-{#                    $.each(data, function(index, value) {#}
-{#                        $(value).appendTo($("#cells"));#}
-{#                    })#}
-{#                },#}
-{#                error: function (data) {#}
-{#                    alert("Error: Ajax call failed.");#}
-{#                }#}
-{#            });#}
-{#        }#}
-{#    </script>#}
-
-{#    <!–- list of incorrect guesses -–>#}
-{#    Incorrect guesses#}
-{#    <br>#}
-{#    <strong class="loss">{{ incorrect_guesses }}</strong>#}
-{#    <br><br>#}
-
-{#    <!–- number of free guesses turns red whenever it is three or less -–>#}
-{#    Free guesses remaining#}
-{#    <br>#}
 {#    {% if free_guesses_remaining > 3 %}#}
 {#        <div class="win">#}
 {#    {% else %}#}
 {#        <div class="loss">#}
 {#    {% endif %}#}
-{#         <strong>{{ free_guesses_remaining }}</strong>#}
-{#    </div>#}
-{#    <br><br>#}
+{#         <strong class="loss">{{ free_guesses_remaining }}</strong>#}
 
-    <!–- reset button -–>
-    <a href="{% url 'index' %}">Reset</a>
-{#    <form action="{% url 'index' %}">#}
-{#        <input type="submit" value="Reset" />#}
-{#    </form>#}
-
-</body>

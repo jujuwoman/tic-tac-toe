@@ -1,10 +1,19 @@
-<!–- page displayed when game is in session -–>
+<!–- base template -–>
 {% extends 'tic_tac_toe/index.html' %}
-{% block content %}
-    <h2>It's Player <span id="nextPlayer">0</span>'s turn.</h2>
-    <br><br><br>
-{#        <br><br><br>#}
-{#    <div id="cell_ids"></div>#}
+
+
+<!–- prompt message -–>
+{% block prompt %}
+    Player <span id="nextPlayer">0</span>'s move.
+{% endblock %}
+
+
+<!–- grid where player makes move -–>
+{% block grid %}
+{#    <h2>Player <span id="nextPlayer">0</span>'s move.</h2>#}
+{#    <br style="line-height:5;">#}
+
+    {#    <div id="cell_ids"></div>#}
 
     {#This belongs to base.html#}
     {# ------------------------------------------------ #}
@@ -14,17 +23,17 @@
         function makeAjaxCallGrid() {
             jQuery.ajax({
                 type: "GET",
-                url: "{% url 'getCellIds' %}",
+                url: "{% url 'make_grid' %}",
                 headers: {
                     "X-CSRFToken": "{{ csrf_token }}"
                 },
-                success: function (data) {
-                    $.each(data, function(index, value) {
+                success: function (result) {
+                    $.each(result, function(index, value) {
                         $(value).appendTo($("#cells"));
                     })
                 },
-                error: function (data) {
-                    alert("Error response:\n" + data);
+                error: function (result) {
+                    alert("Error response:\n" + result);
                 }
             });
         }
@@ -52,16 +61,16 @@
                     "X-CSRFToken": "{{ csrf_token }}"
                 },
                 data: {
-                    "cellId": cellId
+                    "cell_id": cellId
                 },
                 dataType: 'json',
-                success: function (data) {
-                    makeMark(data.currentPlayer, cellId);
-                    makePrompt(data.nextPlayer);
+                success: function (result) {
+                    makeMark(result.currentPlayer, cellId);
+                    makePrompt(result.nextPlayer);
                 },
-                error: function (data) {
-                    alert("Error response:\n" + data);
-                    window.location.href = "{% url 'gg' %}";
+                error: function (result) {
+                    alert("Error response:\n" + result);
+                    window.location.href = "{% url 'game_over' %}";
                 }
             });
         }

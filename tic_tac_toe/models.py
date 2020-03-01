@@ -1,7 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.fields import JSONField
-
 from django.db import models
+from django.forms import ModelForm
 
 # -------------------------------------------------------- #
 # custom modules
@@ -9,6 +9,16 @@ from django.db import models
 from . import config
 
 
+# -------------------------------------------------------- #
+# helpers
+# -------------------------------------------------------- #
+def get_default_array():
+    return [config.DEFAULT_COUNTER_VALUE] * config.N
+
+
+# -------------------------------------------------------- #
+# models
+# -------------------------------------------------------- #
 class Roster(models.Model):
     name = models.CharField(max_length=255)
 
@@ -27,30 +37,35 @@ class Stats(models.Model):
 
 
 class GameState(models.Model):
-    roster = models.ForeignKey(Roster, on_delete=models.CASCADE)
-    turn = models.BooleanField()
+    moves = models.IntegerField(default=config.DEFAULT_COUNTER_VALUE)
 
-    def __bool__(self):
-        return self.turn
-
-
-def get_default_array():
-    return [config.BASE_COUNTER_VALUE] * config.N
+    def __int__(self):
+        return self.moves
 
 
 class Players(models.Model):
-    name = models.CharField(max_length=255)
+    order = models.IntegerField(default=config.DEFAULT_COUNTER_VALUE)
+    name = models.CharField(max_length=config.MAX_NAME_LENGTH)
     rows = JSONField(default=get_default_array)
     cols = JSONField(default=get_default_array)
-    major = models.IntegerField(default=config.BASE_COUNTER_VALUE)
-    minor = models.IntegerField(default=config.BASE_COUNTER_VALUE)
+    major = models.IntegerField(default=config.DEFAULT_COUNTER_VALUE)
+    minor = models.IntegerField(default=config.DEFAULT_COUNTER_VALUE)
 
     def __str__(self):
         return self.name
 
 
 class Marks(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=config.MAX_NAME_LENGTH)
 
     def __str__(self):
         return self.name
+
+
+# -------------------------------------------------------- #
+# model forms
+# -------------------------------------------------------- #
+class PlayersForm(ModelForm):
+    class Meta:
+        model = Players
+        fields = ['order', 'name']

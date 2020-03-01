@@ -47,17 +47,17 @@
 
 
 /* ----------------------------------- */
-.win {
-    color: darkslategray;
-}
+/*.win {*/
+/*    color: darkslategray;*/
+/*}*/
 
-.loss {
-    color: crimson;
-}
+/*.loss {*/
+/*    color: crimson;*/
+/*}*/
 
-.input_block {
-    height: 30em;
-}
+/*.input_block {*/
+/*    height: 30em;*/
+/*}*/
 
 a:link, a:visited {
     color: darkslategray;

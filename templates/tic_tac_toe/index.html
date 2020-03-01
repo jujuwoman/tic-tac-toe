@@ -1,35 +1,37 @@
-<!–- initial game state -–>
+<!–- base template -–>
 {% extends 'tic_tac_toe/base.html' %}
-{% block content %}
-    <h2>It's Player {{ currentPlayer }}'s turn.</h2>
-    <br>
-    <br>
 
-{#    <!–- form where player enters name -–>#}
-{#    <form method="post" novalidate>#}
-{#        {% csrf_token %}#}
-{#        {{ form }}#}
-{#        <button type="submit">Submit</button>#}
-{#    </form>#}
 
-    <div id="cell_ids"></div>
+<!–- form where player enters name -–>
+{% block prompt %}
+    <form action="{% url 'index' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+    </form>
+{% endblock %}
+
+
+<!–- grid where player will make move -–>
+{% block grid %}
+
+    <div class='grid' id="cells"></div>
 
     <script>
         window.onload = makeAjaxCallGrid;
         function makeAjaxCallGrid() {
             jQuery.ajax({
                 type: "GET",
-                url: "{% url 'getCellIds' %}",
+                url: "{% url 'make_grid' %}",
                 headers: {
                     "X-CSRFToken": "{{ csrf_token }}"
                 },
-                success: function (data) {
-                    $.each(data, function(index, value) {
+                success: function (result) {
+                    $.each(result, function(index, value) {
                         $(value).appendTo($("#cells"));
                     })
                 },
-                error: function (data) {
-                    alert("Error response:\n" + data);
+                error: function (result) {
+                    alert("Error response:\n" + result);
                 }
             });
         }
