@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71567c3f-4022-4e8d-b5af-84902f5408dd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/tic_tac_toe/form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/game_over.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/game_over.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/game_session.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/game_session.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tic_tac_toe/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tic_tac_toe/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tic_tac_toe/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/tic_tac_toe/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tic_tac_toe/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tic_tac_toe/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/progress2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/progress2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tic_tac_toe/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tic_tac_toe/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,9 +36,9 @@
       <list>
         <option value="CSS File" />
         <option value="Sass File" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -122,7 +120,7 @@
       <updated>1582317575512</updated>
       <workItem from="1582317593305" duration="22000" />
       <workItem from="1582317644795" duration="156119000" />
-      <workItem from="1583001685246" duration="29438000" />
+      <workItem from="1583001685246" duration="36324000" />
     </task>
     <servers />
   </component>

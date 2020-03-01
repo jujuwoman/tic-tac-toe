@@ -1,0 +1,4 @@
+<form action="{% url 'index' %}" method="POST" class="dynamic-form">
+    {% csrf_token %}
+    {{ form }}
+</form>

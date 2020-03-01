@@ -4,18 +4,13 @@
 
 <!–- form where player enters name -–>
 {% block prompt %}
-    <form action="{% url 'index' %}" method="POST">
-        {% csrf_token %}
-        {{ form }}
-    </form>
+    {% include 'tic_tac_toe/form.html' %}
 {% endblock %}
 
 
 <!–- grid where player will make move -–>
 {% block grid %}
-
     <div class='grid' id="cells"></div>
-
     <script>
         window.onload = makeAjaxCallGrid;
         function makeAjaxCallGrid() {

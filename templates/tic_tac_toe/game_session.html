@@ -4,17 +4,12 @@
 
 <!–- prompt message -–>
 {% block prompt %}
-    Player <span id="nextPlayer">0</span>'s move.
+    <span id="nextPlayer">{{ name }}</span>'s move.
 {% endblock %}
 
 
 <!–- grid where player makes move -–>
 {% block grid %}
-{#    <h2>Player <span id="nextPlayer">0</span>'s move.</h2>#}
-{#    <br style="line-height:5;">#}
-
-    {#    <div id="cell_ids"></div>#}
-
     {#This belongs to base.html#}
     {# ------------------------------------------------ #}
     <div class='grid' id="cells"></div>

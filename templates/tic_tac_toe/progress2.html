@@ -70,3 +70,39 @@
         {#}#}
     </script>
 {% endblock %}
+
+{% block script %}
+    <script>
+        window.onload = makeAjaxCallGrid;
+        function makeAjaxCallGrid() {
+            jQuery.ajax({
+                type: "GET",
+                url: "{% url 'make_grid' %}",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                success: function (result) {
+                    $.each(result, function(index, value) {
+                        $(value).appendTo($("#cells"));
+                    })
+                },
+                error: function (result) {
+                    alert("Error response:\n" + result);
+                }
+            });
+        }
+    </script>
+    <script>
+        $(document).on('submit', 'form.dynamic-form', function(form) {
+            var $form = $(form);
+            $.ajax({
+                type: form.method,
+                url: form.action,
+                data: $form.serialize(),
+                success: function(data) {
+                    $form.replace(data);
+                }
+            });
+        });
+    </script>
+{% endblock %}

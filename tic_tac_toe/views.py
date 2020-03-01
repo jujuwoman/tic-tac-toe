@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
+from django.shortcuts import redirect
 from django.shortcuts import render
 from .forms import NameForm
 
@@ -20,29 +21,19 @@ def index(request):
         form = NameForm(request.POST)
         if form.is_valid():
             service.initialize_game(request)
-            return HttpResponseRedirect('game_session')
+            return redirect('game_session')
     else:
         form = NameForm()
-    context = {'form': form}
-    return render(request, 'tic_tac_toe/index.html', context)
+        context = {'form': form}
+        return render(request, 'tic_tac_toe/index.html', context)
 
 
 def game_session(request):
-    # if request.method == 'POST':
-    #     form = InputForm(request.POST)
-    #     if form.is_valid():
-    #         service.process_player_input(request)
-
-    if request.session['currentPlayer'] == 0:
-        request.session['currentPlayer'] = 1
-    else:
-        request.session['currentPlayer'] = 0
-    # order = request.session['currentPlayer']
-    # player = Players.objects.get(order=order)
-    # cell_id = request.POST['cellId']
-    # if service.if_win(player, cell_id):
-    #     context = {'message': }
-    context = {'currentPlayer': request.session['currentPlayer']}
+    player = Players.objects.get(order=0)
+    context = {
+        'currentPlayer': 0,
+        'name': player.name
+    }
     return render(request, 'tic_tac_toe/game_session.html', context)
 
 
@@ -98,7 +89,8 @@ def make_move(request):
 
     response = {
         "currentPlayer": cur_order,
-        "nextPlayer": nxt_order
+        "nextPlayer": nxt_order,
+        "test": Players.objects.get(order=nxt_order).name
     }
     return JsonResponse(response)
 
@@ -196,3 +188,48 @@ def makeMark(request):
     # starter = randrange(config.NUMBER_OF_PLAYERS)
 
 # html = "<div onclick=\"processCellAjax(\'{0}\'); makeAjaxCall(\'{0}\');\" id=\"{0}\"></div>".format(cell)
+
+
+    # if request.method == 'POST':
+    #     form = InputForm(request.POST)
+    #     if form.is_valid():
+    #         service.process_player_input(request)
+    #
+    # if request.session['currentPlayer'] == 0:
+    #     request.session['currentPlayer'] = 1
+    # else:
+    #     request.session['currentPlayer'] = 0
+    # order = request.session['currentPlayer']
+    # player = Players.objects.get(order=order)
+    # cell_id = request.POST['cellId']
+    # if service.if_win(player, cell_id):
+    #     context = {'message': }
+
+
+# pre-ajax method
+# def index(request):
+#     if request.method == 'POST':
+#         form = NameForm(request.POST)
+#         if form.is_valid():
+#             service.initialize_game(request)
+#             return redirect('game_session')
+#     else:
+#         form = NameForm()
+#     context = {'form': form}
+#     return render(request, 'tic_tac_toe/index.html', context)
+
+# ajax method
+# def index(request):
+#     if request.method == 'POST':
+#         form = NameForm(request.POST)
+#         if form.is_valid():
+#             service.initialize_game(request)
+#             return redirect('game_session')
+#     else:
+#         form = NameForm()
+#     template = 'tic_tac_toe/index.html'
+#     context = {'form': form}
+#     return render(request, template, context)
+
+
+
