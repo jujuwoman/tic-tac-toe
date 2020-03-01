@@ -1,0 +1,7 @@
+{% if game_result == "win" %}
+    <span id="prompt_symbol"><span id={{ current_player.mark }}></span></span>
+    <span id="prompt_name">{{ current_player.name }}</span>
+    wins!
+{% else %}
+    Draw!
+{% endif %}

@@ -1,5 +1,4 @@
 from django.http import HttpResponse
-from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -10,7 +9,6 @@ from .forms import NameForm
 # -------------------------------------------------------- #
 from . import config
 from . import service
-from . models import Players
 
 
 # -------------------------------------------------------- #
@@ -29,22 +27,20 @@ def index(request):
 
 
 def game_session(request):
-    player = Players.objects.get(order=0)
     context = {
-        'currentPlayer': 0,
-        'name': player.name
+        "first_player": request.session['first_player'],
+        "second_player": request.session['second_player']
     }
     return render(request, 'tic_tac_toe/game_session.html', context)
 
 
 def game_over(request):
-    # result = request.session['result']
-    # if result == 1:
-    #     message = config.WINNING_MESSAGE
-    # else:
-    #     message = config.LOSING_MESSAGE
-    prompt = "game over"
-    context = {'prompt': prompt}
+    context = {
+        "first_player": request.session['first_player'],
+        "second_player": request.session['second_player'],
+        "current_player": request.session['current_player'],
+        "game_result": request.session['game_result']
+    }
     return render(request, 'tic_tac_toe/game_over.html', context)
 
 
@@ -61,7 +57,7 @@ def make_grid(request):
     for i in range(config.N):
         for j in range(config.N):
             cell = "{}_{}".format(i, j)
-            html = "<div onclick=\"makeAjaxCall(\'{0}\');\" id=\"{0}\"></div>".format(cell)
+            html = "<div onclick=\"makeAjaxCall(\'{0}\');\" id=\"{0}\" ></div>".format(cell)
             response.append(html)
     return JsonResponse(response, safe=False)
 
@@ -69,36 +65,47 @@ def make_grid(request):
 def make_move(request):
 
     # get current player, mebbe save this info to model and call from service
-    cur_order = request.session['moves'] % config.NUMBER_OF_PLAYERS
+    current_player_order = request.session['moves'] % config.NUMBER_OF_PLAYERS
     request.session['moves'] += 1
-    nxt_order = request.session['moves'] % config.NUMBER_OF_PLAYERS
+    next_player_order = request.session['moves'] % config.NUMBER_OF_PLAYERS
 
-    player = Players.objects.get(order=cur_order)
+    current_player_name = service.get_name_by_order(current_player_order)
+    next_player_name = service.get_name_by_order(next_player_order)
+
+    current_player_mark = config.MARKS[current_player_order]
+    next_player_mark = config.MARKS[next_player_order]
+
+    request.session['current_player'] = {
+        "order": current_player_order,
+        "name": current_player_name,
+        "mark": current_player_mark
+    }
+    request.session['next_player'] = {
+        "order": next_player_order,
+        "name": next_player_name,
+        "mark": next_player_mark
+    }
+
+    current_player = service.get_player_by_order(current_player_order)
     cell_id = request.POST['cell_id']
     moves = request.session['moves']
 
-    if service.if_win(player, cell_id):
-        message = "{} wins.".format(cur_order)
-        context = {'message': message}
-        return render(request, 'tic_tac_toe/game_over.html', context)
-
-    elif service.if_draw(moves):
-        message = "Draw"
-        context = {'message': message}
-        return render(request, 'tic_tac_toe/game_over.html', context)
+    if service.if_win(current_player, cell_id):
+        request.session['game_result'] = "win"
+    elif service.if_grid_filled(moves):
+        request.session['game_result'] = "draw"
 
     response = {
-        "currentPlayer": cur_order,
-        "nextPlayer": nxt_order,
-        "test": Players.objects.get(order=nxt_order).name
+        "current_player": request.session['current_player'],
+        "next_player": request.session['next_player'],
+        "game_result": request.session['game_result']
     }
     return JsonResponse(response)
 
 
-def makeMark(request):
-    response = '<div id=circle></div>'
-    return HttpResponse(response)
-
+# def makeMark(request):
+#     response = '<div id=circle></div>'
+#     return HttpResponse(response)
 
 # def index(request):
 #     # initialize form
@@ -184,6 +191,16 @@ def makeMark(request):
 
 # 'testAjax': request.is_ajax(),
 # 'currentPlayer': request.POST.get('currentPlayer')
+
+    # if service.if_win(player, cell_id):
+    #     message = "{} wins.".format(cur_order)
+    #     context = {'message': message}
+    #     return render(request, 'tic_tac_toe/game_over.html', context)
+    #
+    # elif service.if_draw(moves):
+    #     message = "Draw"
+    #     context = {'message': message}
+    #     return render(request, 'tic_tac_toe/game_over.html', context)
 
     # starter = randrange(config.NUMBER_OF_PLAYERS)
 

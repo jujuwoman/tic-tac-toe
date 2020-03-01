@@ -12,25 +12,39 @@
 
 
 <body>
-    <!–- game header -–>
+    <!–- title -–>
     <h1>Tic-Tac-Toe</h1>
-    <br style="line-height:5;">
+    <br style="line-height:2;">
+
 
     <!–- prompt message -–>
     <h2>
-    {% block prompt %}
-    {% endblock %}
+        {% block prompt %}
+        {% endblock %}
     </h2>
-    <br style="line-height:5;">
+    <br style="line-height:2;">
 
-    <!–- grid where player makes move -–>
+
+    <!–- grid -–>
     {% block grid %}
     {% endblock %}
-    <br style="line-height:5;">
+    <br style="line-height:2;">
+
+
+    <!–- legend -–>
+    <h2>
+        {% block legend %}
+        {% endblock %}
+    </h2>
+    <br style="line-height:2;">
+
 
     <!–- reset button -–>
-    <a href="{% url 'index' %}">Reset</a>
-    <br style="line-height:5;">
+    <h2>
+        <a href="{% url 'index' %}">Reset</a>
+    </h2>
+    <br style="line-height:2;">
+
 
     <!–- historical data -–>
     {% block history %}

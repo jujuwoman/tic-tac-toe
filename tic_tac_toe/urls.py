@@ -18,9 +18,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # path('progress2/', views.progress2, name='progress2'),
-    # path('getNextPlayer/', views.getNextPlayer, name='getNextPlayer'),
-
     path('', views.index, name='index'),
     path('game_session/', views.game_session, name='game_session'),
     path('game_over/', views.game_over, name='game_over'),

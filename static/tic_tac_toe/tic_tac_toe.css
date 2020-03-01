@@ -1,13 +1,5 @@
 /* CSS for tic_tac_toe */
 
-/* ----------------------------------- */
-/* .line{*/
-/*width: 112px;*/
-/*height: 47px;*/
-/*border-bottom: 10px solid black;*/
-/*position: absolute;*/
-/*}*/
-
 
 /* ----------------------------------- */
 .grid {
@@ -27,38 +19,27 @@
     justify-content: center;
     align-items: center;
     background-color: whitesmoke;
+    font-size: 4em;
     cursor: pointer;
 }
 
+
 /* ----------------------------------- */
+/* IMPORTANT: modify config.MARKS if changing element id names */
 #circle:before {
     content: "\2B55";
-    font-size: 4em;
     color: transparent;
     text-shadow: 0 0 0 indianred;
 }
 
 #cross:before {
     content: "\274C";
-    font-size: 4em;
     color: transparent;
     text-shadow: 0 0 0 mediumseagreen;
 }
 
 
 /* ----------------------------------- */
-/*.win {*/
-/*    color: darkslategray;*/
-/*}*/
-
-/*.loss {*/
-/*    color: crimson;*/
-/*}*/
-
-/*.input_block {*/
-/*    height: 30em;*/
-/*}*/
-
 a:link, a:visited {
     color: darkslategray;
     text-decoration: none;
@@ -68,6 +49,7 @@ a:active, a:hover {
     color: crimson;
     text-decoration: none;
 }
+
 
 /* ----------------------------------- */
 body {
@@ -79,10 +61,6 @@ body {
 }
 
 h2 {
-    height: 1em;
-}
-
-strong {
     height: 1em;
 }
 

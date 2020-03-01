@@ -1,10 +1,10 @@
 <!–- base template -–>
-{% extends 'tic_tac_toe/index.html' %}
+{% extends 'tic_tac_toe/base.html' %}
 
 
 <!–- prompt message -–>
 {% block prompt %}
-    <span id="nextPlayer">{{ name }}</span>'s move.
+    {% include 'tic_tac_toe/turn.html' %}
 {% endblock %}
 
 
@@ -36,19 +36,18 @@
 
     {# ------------------------------------------------ #}
     <script>
-        var marks = ["cross", "circle"];
-
-        function makeMark(playerId, cellId) {
+        function makeMark(mark, cell_id) {
             var html = '<div id=mark></div>';
-            var mark = marks[playerId];
-            document.getElementById(cellId).outerHTML = html.replace('mark', mark);
+            document.getElementById(cell_id).outerHTML = html.replace('mark', mark);
         }
 
-        function makePrompt(nextPlayer) {
-            document.getElementById("nextPlayer").innerHTML = nextPlayer;
+        function makePrompt(mark, name) {
+            var html = '<span id=mark></span>';
+            document.getElementById("prompt_name").innerHTML = name;
+            document.getElementById("prompt_symbol").innerHTML = html.replace('mark', mark);
         }
 
-        function makeAjaxCall(cellId) {
+        function makeAjaxCall(cell_id) {
             $.ajax({
                 type: "POST",
                 url: "{% url 'make_move' %}",
@@ -56,12 +55,17 @@
                     "X-CSRFToken": "{{ csrf_token }}"
                 },
                 data: {
-                    "cell_id": cellId
+                    "cell_id": cell_id
                 },
                 dataType: 'json',
                 success: function (result) {
-                    makeMark(result.currentPlayer, cellId);
-                    makePrompt(result.nextPlayer);
+                    makeMark(result.current_player["mark"], cell_id);
+
+                    if (result.game_result) {
+                        window.location.href = "{% url 'game_over' %}";
+                    } else {
+                        makePrompt(result.next_player["mark"], result.next_player["name"]);
+                    }
                 },
                 error: function (result) {
                     alert("Error response:\n" + result);
@@ -93,4 +97,10 @@
 {#        }#}
 {#    </script>#}
 
+{% endblock %}
+
+
+<!–- legend that shows which player uses which symbol -–>
+{% block legend %}
+    {% include 'tic_tac_toe/legend.html' %}
 {% endblock %}
