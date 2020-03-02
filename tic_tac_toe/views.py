@@ -15,6 +15,7 @@ from . import service
 # pages
 # -------------------------------------------------------- #
 def index(request):
+    service.make_index_grid()
     if request.method == 'POST':
         form = NameForm(request.POST)
         if form.is_valid():
@@ -27,6 +28,7 @@ def index(request):
 
 
 def game_session(request):
+    service.make_game_session_grid()
     context = {
         "first_player": request.session['first_player'],
         "second_player": request.session['second_player']
@@ -47,17 +49,12 @@ def game_over(request):
 # -------------------------------------------------------- #
 # subpages
 # -------------------------------------------------------- #
-# def get_name(request):
-#     if request.method == 'POST':
-#         form = NameForm(request.POST)
-#         if form.is_valid():
-#             return HttpResponseRedirect('session')
 def make_grid(request):
     response = []
     for i in range(config.N):
         for j in range(config.N):
             cell = "{}_{}".format(i, j)
-            html = "<div onclick=\"makeAjaxCall(\'{0}\');\" id=\"{0}\" ></div>".format(cell)
+            html = "<div onclick=\"makeAjaxCall(this.id);\" id=\"{}\"></div>".format(cell)
             response.append(html)
     return JsonResponse(response, safe=False)
 
@@ -89,7 +86,6 @@ def make_move(request):
     current_player = service.get_player_by_order(current_player_order)
     cell_id = request.POST['cell_id']
     moves = request.session['moves']
-
     if service.if_win(current_player, cell_id):
         request.session['game_result'] = "win"
     elif service.if_grid_filled(moves):

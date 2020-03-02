@@ -20,7 +20,8 @@
     align-items: center;
     background-color: whitesmoke;
     font-size: 4em;
-    cursor: pointer;
+    pointer-events: auto;
+    cursor: default;
 }
 
 

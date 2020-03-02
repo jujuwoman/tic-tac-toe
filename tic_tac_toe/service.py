@@ -8,6 +8,37 @@ from . import config
 from . models import Players
 
 
+CELL = "\t<div onclick=\"{}\" style=\"{}\" id=\"{}\"></div>"
+HTML = "<div class='grid' id=\"cells\">\n{}\n</div>"
+PATH = "templates/tic_tac_toe/grid.html"
+
+
+def make_index_grid():
+    cells = "\n".join([CELL for _ in range(config.N ** config.DIMENSIONS)])
+    html = HTML.format(cells)
+    with open(PATH, "w") as file:
+        file.write(html)
+
+
+def make_game_session_grid():
+    arr = []
+    for i in range(config.N):
+        for j in range(config.N):
+            java_script = "makeAjaxCall(this.id);"
+            cursor = "cursor:pointer"
+            cell_id = "{}_{}".format(i, j)
+            arr.append(CELL.format(java_script, cursor, cell_id))
+    cells = "\n".join(arr)
+    html = HTML.format(cells)
+    with open(PATH, "w") as file:
+        file.write(html)
+
+
+def make_cell_ids():
+    cell_ids = ["{}_{}".format(i, j) for i in range(config.N) for j in range(config.N)]
+    return cell_ids
+
+
 def initialize_game(request):
     name = request.POST['name']
     player_names = [config.DEFAULT_OPPONENT_NAME, name]

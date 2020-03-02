@@ -10,31 +10,28 @@
 
 <!–- grid where player makes move -–>
 {% block grid %}
-    {#This belongs to base.html#}
-    {# ------------------------------------------------ #}
-    <div class='grid' id="cells"></div>
-    <script>
-        window.onload = makeAjaxCallGrid;
-        function makeAjaxCallGrid() {
-            jQuery.ajax({
-                type: "GET",
-                url: "{% url 'make_grid' %}",
-                headers: {
-                    "X-CSRFToken": "{{ csrf_token }}"
-                },
-                success: function (result) {
-                    $.each(result, function(index, value) {
-                        $(value).appendTo($("#cells"));
-                    })
-                },
-                error: function (result) {
-                    alert("Error response:\n" + result);
-                }
-            });
-        }
-    </script>
+    {% include 'tic_tac_toe/grid.html' %}
+{#    <div class='grid' id="cells"></div>#}
+{#    <script>#}
+{#        window.onload = makeAjaxCallGrid;#}
+{#        function makeAjaxCallGrid() {#}
+{#            jQuery.ajax({#}
+{#                type: "GET",#}
+{#                url: "{% url 'make_grid' %}",#}
+{#                headers: {#}
+{#                    "X-CSRFToken": "{{ csrf_token }}"#}
+{#                },#}
+{#                success: function (result) {#}
+{#                    $.each(result, function(index, value) {#}
+{#                        $(value).appendTo($("#cells"));#}
+{#                    })#}
+{#                },#}
+{#                error: function (result) {#}
+{#                    alert("Error response:\n" + result);#}
+{#                }#}
+{#            });#}
+{#        }#}
 
-    {# ------------------------------------------------ #}
     <script>
         function makeMark(mark, cell_id) {
             var html = '<div id=mark></div>';
@@ -44,7 +41,7 @@
         function makePrompt(mark, name) {
             var html = '<span id=mark></span>';
             document.getElementById("prompt_name").innerHTML = name;
-            document.getElementById("prompt_symbol").innerHTML = html.replace('mark', mark);
+            document.getElementById("prompt_mark").innerHTML = html.replace('mark', mark);
         }
 
         function makeAjaxCall(cell_id) {
