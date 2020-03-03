@@ -21,7 +21,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('game_session/', views.game_session, name='game_session'),
     path('game_over/', views.game_over, name='game_over'),
-    path('make_grid/', views.make_grid, name='make_grid'),
+    # path('make_grid/', views.make_grid, name='make_grid'),
     path('make_move/', views.make_move, name='make_move'),
     path('admin/', admin.site.urls)
 ]

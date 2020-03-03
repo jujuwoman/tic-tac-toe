@@ -28,7 +28,6 @@ def index(request):
 
 
 def game_session(request):
-    service.make_game_session_grid()
     context = {
         "first_player": request.session['first_player'],
         "second_player": request.session['second_player']
@@ -49,54 +48,43 @@ def game_over(request):
 # -------------------------------------------------------- #
 # subpages
 # -------------------------------------------------------- #
-def make_grid(request):
-    response = []
-    for i in range(config.N):
-        for j in range(config.N):
-            cell = "{}_{}".format(i, j)
-            html = "<div onclick=\"makeAjaxCall(this.id);\" id=\"{}\"></div>".format(cell)
-            response.append(html)
-    return JsonResponse(response, safe=False)
-
-
 def make_move(request):
 
-    # get current player, mebbe save this info to model and call from service
-    current_player_order = request.session['moves'] % config.NUMBER_OF_PLAYERS
-    request.session['moves'] += 1
-    next_player_order = request.session['moves'] % config.NUMBER_OF_PLAYERS
+    request.session['moves'] += 1 # change to free_cells later
 
-    current_player_name = service.get_name_by_order(current_player_order)
-    next_player_name = service.get_name_by_order(next_player_order)
-
-    current_player_mark = config.MARKS[current_player_order]
-    next_player_mark = config.MARKS[next_player_order]
-
-    request.session['current_player'] = {
-        "order": current_player_order,
-        "name": current_player_name,
-        "mark": current_player_mark
-    }
-    request.session['next_player'] = {
-        "order": next_player_order,
-        "name": next_player_name,
-        "mark": next_player_mark
-    }
-
+    # check game's terminating conditions
+    current_player_order = request.session["switch"]
     current_player = service.get_player_by_order(current_player_order)
     cell_id = request.POST['cell_id']
-    moves = request.session['moves']
+    moves = request.session['moves'] # change to free_cells later
+
+    # when there's a winner
     if service.if_win(current_player, cell_id):
         request.session['game_result'] = "win"
+        context = {
+            "current_player": request.session['current_player'],
+            "game_result": request.session['game_result']
+        }
+    # when there's a draw
     elif service.if_grid_filled(moves):
         request.session['game_result'] = "draw"
-
-    response = {
-        "current_player": request.session['current_player'],
-        "next_player": request.session['next_player'],
-        "game_result": request.session['game_result']
-    }
-    return JsonResponse(response)
+        context = {
+            "current_player": request.session['current_player'],
+            "game_result": request.session['game_result']
+        }
+    # when the game is still in progress
+    else:
+        context = {
+            "current_player": request.session['current_player'],
+            "next_player": request.session['next_player'],
+            "game_result": request.session['game_result']
+        }
+        # switch turns for players
+        request.session["switch"] ^= 1
+        tmp = request.session["next_player"]
+        request.session["next_player"] = request.session["current_player"]
+        request.session["current_player"] = tmp
+    return JsonResponse(context)
 
 
 # def makeMark(request):
@@ -246,3 +234,11 @@ def make_move(request):
 
 
 
+# def make_grid(request):
+#     response = []
+#     for i in range(config.N):
+#         for j in range(config.N):
+#             cell = "{}_{}".format(i, j)
+#             html = "<div onclick=\"makeAjaxCall(this.id);\" id=\"{}\"></div>".format(cell)
+#             response.append(html)
+#     return JsonResponse(response, safe=False)

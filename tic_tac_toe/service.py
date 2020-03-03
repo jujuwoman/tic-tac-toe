@@ -1,3 +1,4 @@
+import json
 from random import randrange
 from random import shuffle
 
@@ -39,38 +40,50 @@ def make_cell_ids():
     return cell_ids
 
 
+def make_free_cells():
+    cell_ids = ["{}_{}".format(i, j) for i in range(config.N) for j in range(config.N)]
+    return cell_ids
+
+
 def initialize_game(request):
-    name = request.POST['name']
+
+    make_game_session_grid()
+
+    # initialize session data: game state
+    # request["free_cells"] = json.dumps(make_cell_ids())
+    # request["used_cells"] = json.dumps([])
+    request.session["moves"] = config.DEFAULT_COUNTER_VALUE
+    request.session["switch"] = 0
+    request.session["game_result"] = ""
+    # request.session['seed'] = randrange(config.NUMBER_OF_PLAYERS)
+
+    # randomize players
+    name = request.POST["name"]
     player_names = [config.DEFAULT_OPPONENT_NAME, name]
     shuffle(player_names)
 
-    request.session['moves'] = config.DEFAULT_COUNTER_VALUE
-    request.session['game_result'] = ""
-    # request.session['seed'] = randrange(config.NUMBER_OF_PLAYERS)
+    # initialize model: Players
     Players.objects.all().delete()
-
     for i, e in enumerate(player_names):
         Players.objects.create(order=i, name=e)
 
+    # initialize session data: players
     first_player_order = 0
     second_player_order = 1
-
     first_player_name = get_name_by_order(first_player_order)
     second_player_name = get_name_by_order(second_player_order)
-
     first_player_mark = config.MARKS[first_player_order]
     second_player_mark = config.MARKS[second_player_order]
-
     request.session["first_player"] = {
-        "order": first_player_order,
         "name": first_player_name,
         "mark": first_player_mark
     }
     request.session["second_player"] = {
-        "order": second_player_order,
         "name": second_player_name,
         "mark": second_player_mark
     }
+    request.session["current_player"] = request.session["first_player"]
+    request.session["next_player"] = request.session["second_player"]
 
 
 def get_player_by_order(order):
