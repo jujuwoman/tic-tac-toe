@@ -10,27 +10,7 @@
 
 <!–- grid where player makes move -–>
 {% block grid %}
-    {% include 'tic_tac_toe/grid.html' %}
-{#    <div class='grid' id="cells"></div>#}
-{#    <script>#}
-{#        window.onload = makeAjaxCallGrid;#}
-{#        function makeAjaxCallGrid() {#}
-{#            jQuery.ajax({#}
-{#                type: "GET",#}
-{#                url: "{% url 'make_grid' %}",#}
-{#                headers: {#}
-{#                    "X-CSRFToken": "{{ csrf_token }}"#}
-{#                },#}
-{#                success: function (result) {#}
-{#                    $.each(result, function(index, value) {#}
-{#                        $(value).appendTo($("#cells"));#}
-{#                    })#}
-{#                },#}
-{#                error: function (result) {#}
-{#                    alert("Error response:\n" + result);#}
-{#                }#}
-{#            });#}
-{#        }#}
+    {% include 'tic_tac_toe/grid_active.html' %}
 
     <script>
         function makeMark(mark, cell_id) {
@@ -44,7 +24,7 @@
             document.getElementById("prompt_mark").innerHTML = html.replace('mark', mark);
         }
 
-        function makeAjaxCall(cell_id) {
+        function makeMoveWithAjaxCall(cell_id) {
             $.ajax({
                 type: "POST",
                 url: "{% url 'make_move' %}",
@@ -55,45 +35,22 @@
                     "cell_id": cell_id
                 },
                 dataType: 'json',
-                success: function (result) {
-                    makeMark(result.current_player["mark"], cell_id);
+                success: function (data) {
+                    makeMark(data.current_player["mark"], cell_id);
 
-                    if (result.game_result) {
+                    if (data.result) {
                         window.location.href = "{% url 'game_over' %}";
                     } else {
-                        makePrompt(result.next_player["mark"], result.next_player["name"]);
+                        makePrompt(data.next_player["mark"], data.next_player["name"]);
                     }
                 },
-                error: function (result) {
-                    alert("Error response:\n" + result);
+                error: function (data) {
+                    alert("Error response:\n" + data);
                     window.location.href = "{% url 'game_over' %}";
                 }
             });
         }
     </script>
-
-
-    {# ------------------------------------------------ #}
-{#    <div onclick="getDb()" id="db">DB</div>#}
-{#    <script>#}
-{#        function getDb() {#}
-{#            jQuery.ajax({#}
-{#                type: "GET",#}
-{#                url: "{% url 'showModels' %}",#}
-{#                headers: {#}
-{#                    "X-CSRFToken": "{{ csrf_token }}"#}
-{#                },#}
-{#                success: function (data) {#}
-{#                    jQuery("#db").html(data);#}
-{#                },#}
-{#                error: function (data) {#}
-{#                    alert('error');#}
-{#                    alert("Error response:\n" + data);#}
-{#                }#}
-{#            });#}
-{#        }#}
-{#    </script>#}
-
 {% endblock %}
 
 

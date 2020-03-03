@@ -50,34 +50,3 @@
     {% block history %}
     {% endblock %}
 </body>
-
-
-{#    <div class='grid' id="cells"></div>#}
-{#    <script>#}
-{#        window.onload = makeAjaxCallGrid;#}
-{#        function makeAjaxCallGrid() {#}
-{#            jQuery.ajax({#}
-{#                type: "GET",#}
-{#                url: "{% url 'getCellIds' %}",#}
-{#                headers: {#}
-{#                    "X-CSRFToken": "{{ csrf_token }}"#}
-{#                },#}
-{#                success: function (data) {#}
-{#                    $.each(data, function(index, value) {#}
-{#                        $(value).appendTo($("#cells"));#}
-{#                    })#}
-{#                },#}
-{#                error: function (data) {#}
-{#                    alert("Error response:\n" + data);#}
-{#                }#}
-{#            });#}
-{#        }#}
-{#    </script>#}
-
-{#    {% if free_guesses_remaining > 3 %}#}
-{#        <div class="win">#}
-{#    {% else %}#}
-{#        <div class="loss">#}
-{#    {% endif %}#}
-{#         <strong class="loss">{{ free_guesses_remaining }}</strong>#}
-

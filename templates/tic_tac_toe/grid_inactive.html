@@ -1,0 +1,9 @@
+<div class='grid'>
+    {% for cell, mark in map.items %}
+        {% if mark %}
+            <div id={{ mark }}></div>
+        {% else %}
+            <div></div>
+        {% endif %}
+    {% endfor %}
+</div>

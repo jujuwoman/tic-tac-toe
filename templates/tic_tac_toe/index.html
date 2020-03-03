@@ -10,26 +10,5 @@
 
 <!–- grid where player will make move -–>
 {% block grid %}
-    {% include 'tic_tac_toe/grid.html' %}
-{#    <div class='grid' id="cells"></div>#}
-{#    <script>#}
-{#        window.onload = makeAjaxCallGrid;#}
-{#        function makeAjaxCallGrid() {#}
-{#            jQuery.ajax({#}
-{#                type: "GET",#}
-{#                url: "{% url 'make_grid' %}",#}
-{#                headers: {#}
-{#                    "X-CSRFToken": "{{ csrf_token }}"#}
-{#                },#}
-{#                success: function (result) {#}
-{#                    $.each(result, function(index, value) {#}
-{#                        $(value).appendTo($("#cells"));#}
-{#                    })#}
-{#                },#}
-{#                error: function (result) {#}
-{#                    alert("Error response:\n" + result);#}
-{#                }#}
-{#            });#}
-{#        }#}
-{#    </script>#}
+    {% include 'tic_tac_toe/grid_inactive.html' %}
 {% endblock %}

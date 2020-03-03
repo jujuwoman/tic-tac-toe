@@ -1,5 +1,5 @@
 <!–- base template -–>
-{% extends 'tic_tac_toe/base.html' %}
+{% extends 'tic_tac_toe/game_session.html' %}
 
 
 <!–- game over message -–>
@@ -10,17 +10,10 @@
 
 <!–- grid that displays final game state -–>
 {% block grid %}
-    {% include 'tic_tac_toe/grid.html' %}
-{% endblock %}
-
-
-<!–- legend that shows which player uses which symbol -–>
-{% block legend %}
-    {% include 'tic_tac_toe/legend.html' %}
+    {% include 'tic_tac_toe/grid_inactive.html' %}
 {% endblock %}
 
 
 <!–- historical data -–>
 {% block history %}
 {% endblock %}
-
