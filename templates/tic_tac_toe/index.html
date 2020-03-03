@@ -1,14 +1,14 @@
 <!–- base template -–>
-{% extends 'tic_tac_toe/base.html' %}
+{% extends "tic_tac_toe/base.html" %}
 
 
 <!–- form where player enters name -–>
-{% block prompt %}
-    {% include 'tic_tac_toe/form.html' %}
+{% block message %}
+    {% include "tic_tac_toe/form.html" %}
 {% endblock %}
 
 
 <!–- grid where player will make move -–>
 {% block grid %}
-    {% include 'tic_tac_toe/grid_inactive.html' %}
+    {% include "tic_tac_toe/grid_inactive.html" %}
 {% endblock %}

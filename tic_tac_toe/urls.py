@@ -21,6 +21,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('game_session/', views.game_session, name='game_session'),
     path('game_over/', views.game_over, name='game_over'),
-    path('make_move/', views.make_move, name='make_move'),
+    path('make_move_via_ajax/', views.make_move_via_ajax, name='make_move_via_ajax'),
     path('admin/', admin.site.urls)
 ]

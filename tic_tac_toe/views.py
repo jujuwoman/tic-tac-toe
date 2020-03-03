@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
+from random import randrange
 from .forms import NameForm
+import time
 
 # -------------------------------------------------------- #
 # custom modules
@@ -16,9 +18,7 @@ from . import service
 def index(request):
     # clear cache
     request.session.flush()
-
-    # initialize following session data:
-    # map
+    # initialize session data: map
     service.initialize_map(request)
 
     if request.method == "POST":
@@ -32,7 +32,7 @@ def index(request):
             "map": request.session["map"],
             "form": form
         }
-        return render(request, 'tic_tac_toe/index.html', context)
+        return render(request, "tic_tac_toe/index.html", context)
 
 
 def game_session(request):
@@ -60,44 +60,14 @@ def game_over(request):
 # subpages
 # -------------------------------------------------------- #
 # used by game_session.html
-def make_move(request):
+def make_move_via_ajax(request):
 
-    request.session["moves"] += 1 # change to free_cells later
-
-    current_player_order = request.session["switch"]
-    current_player_object = service.get_player_object_by_order(current_player_order)
     cell_id = request.POST["cell_id"]
-    moves = request.session["moves"] # change to free_cells later
+    current_player_order = request.session["switch"]
 
-    # mark map
+    # update game state
     request.session["map"][cell_id] = config.MARKS[current_player_order]
+    service.update_free_cells(request, cell_id)
 
-    # check game's terminating conditions
-    # when there's a winner
-    if service.if_win(current_player_object, cell_id):
-        request.session['result'] = "win"
-        context = {
-            "current_player": request.session["current_player"],
-            "result": request.session["result"]
-        }
-    # when there's a draw
-    elif service.if_grid_filled(moves):
-        request.session["result"] = "draw"
-        context = {
-            "current_player": request.session["current_player"],
-            "result": request.session["result"]
-        }
-    # when the game is still in progress
-    else:
-        context = {
-            "current_player": request.session["current_player"],
-            "next_player": request.session["next_player"],
-            "result": request.session["result"]
-        }
-        # switch turns for players
-        request.session["switch"] ^= 1
-        tmp = request.session["next_player"]
-        request.session["next_player"] = request.session["current_player"]
-        request.session["current_player"] = tmp
-
+    context = service.get_context_for_move(request, current_player_order, cell_id)
     return JsonResponse(context)

@@ -67,4 +67,4 @@ class Marks(models.Model):
 class PlayersForm(ModelForm):
     class Meta:
         model = Players
-        fields = ['order', 'name']
+        fields = ["order", "name"]

@@ -6,8 +6,8 @@
 <head>
     <title>tic-tac-toe</title>
     <link rel="stylesheet" href="{% static 'tic_tac_toe/tic_tac_toe.css' %}">
-    <script src="{% static 'jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'tic_tac_toe/tic_tac_toe.js' %}"></script>
+    <script src="{% static 'jquery-3.4.1.min.js' %}"></script>
 </head>
 
 
@@ -19,7 +19,7 @@
 
     <!–- prompt message -–>
     <h2>
-        {% block prompt %}
+        {% block message %}
         {% endblock %}
     </h2>
     <br style="line-height:2;">

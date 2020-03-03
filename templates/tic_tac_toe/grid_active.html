@@ -1,9 +1,9 @@
-<div class='grid' id="cells">
+<div class="grid" id="cells">
     {% for cell, mark in map.items %}
         {% if mark %}
             <div id={{ mark }}></div>
         {% else %}
-            <div onclick="makeMoveWithAjaxCall(this.id);" style="cursor: pointer" id={{ cell }}></div>
+            <div onclick="makeMoveViaAjax(this.id);" style="cursor: pointer" id={{ cell }}></div>
         {% endif %}
     {% endfor %}
 </div>

@@ -1,16 +1,16 @@
 <!–- base template -–>
-{% extends 'tic_tac_toe/game_session.html' %}
+{% extends "tic_tac_toe/game_session.html" %}
 
 
 <!–- game over message -–>
-{% block prompt %}
-    {% include 'tic_tac_toe/result.html' %}
+{% block message %}
+    {% include "tic_tac_toe/result.html" %}
 {% endblock %}
 
 
 <!–- grid that displays final game state -–>
 {% block grid %}
-    {% include 'tic_tac_toe/grid_inactive.html' %}
+    {% include "tic_tac_toe/grid_inactive.html" %}
 {% endblock %}
 
 

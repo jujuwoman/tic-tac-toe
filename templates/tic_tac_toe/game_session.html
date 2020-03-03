@@ -1,33 +1,59 @@
 <!–- base template -–>
-{% extends 'tic_tac_toe/base.html' %}
+{% extends "tic_tac_toe/base.html" %}
+{% load static %}
 
 
 <!–- prompt message -–>
-{% block prompt %}
-    {% include 'tic_tac_toe/turn.html' %}
+{% block message %}
+    {% include "tic_tac_toe/prompt.html" %}
 {% endblock %}
 
 
 <!–- grid where player makes move -–>
 {% block grid %}
-    {% include 'tic_tac_toe/grid_active.html' %}
+    {% include "tic_tac_toe/grid_active.html" %}
+
 
     <script>
+        {# must match constant in config.py #}
+        const DEFAULT_COMPUTER_NAME = "Computer";
+
+        // Simulate click function
+        function click_cell(cell_id) {
+            document.querySelector(cell_id).click();
+        }
+
+
+
+
+
+
+
+        {# used by makeMoveViaAjax #}
         function makeMark(mark, cell_id) {
-            var html = '<div id=mark></div>';
-            document.getElementById(cell_id).outerHTML = html.replace('mark', mark);
+            let html = '<div id=mark></div>';
+            document.getElementById(cell_id).outerHTML = html.replace("mark", mark);
         }
 
+        {# used by makeMoveViaAjax #}
         function makePrompt(mark, name) {
-            var html = '<span id=mark></span>';
+            let html = '<span id=mark></span>';
             document.getElementById("prompt_name").innerHTML = name;
-            document.getElementById("prompt_mark").innerHTML = html.replace('mark', mark);
+            document.getElementById("prompt_mark").innerHTML = html.replace("mark", mark);
         }
 
-        function makeMoveWithAjaxCall(cell_id) {
+        {# used by makeMoveViaAjax #}
+{#        function isComputer(name) {#}
+{#            if (name === DEFAULT_COMPUTER_NAME) {#}
+{#                let html = "test";#}
+{#            }#}
+{#        }#}
+
+        {# handles player's move #}
+        function makeMoveViaAjax(cell_id) {
             $.ajax({
                 type: "POST",
-                url: "{% url 'make_move' %}",
+                url: "{% url 'make_move_via_ajax' %}",
                 headers: {
                     "X-CSRFToken": "{{ csrf_token }}"
                 },
@@ -42,11 +68,25 @@
                         window.location.href = "{% url 'game_over' %}";
                     } else {
                         makePrompt(data.next_player["mark"], data.next_player["name"]);
+
+                        {#if (data.next_player["name"] == "Computer") {#}
+                        {#    makeMoveViaAjax()#}
+                        {#}#}
+
+                        {#if (data.is_computer, or rahter whehter nxt player is computer) {#}
+                            {#timedelay? mebbe in python#}
+                        {#    makeMark(computer_mark, computer_move_cell_id)#}
+                        {#}#}
+                        {#OR!!;#}
+                        {#ask computer ot make ajax call#}
+
+
+
+
                     }
                 },
                 error: function (data) {
-                    alert("Error response:\n" + data);
-                    window.location.href = "{% url 'game_over' %}";
+                    alert("Error response :\n" + data);
                 }
             });
         }

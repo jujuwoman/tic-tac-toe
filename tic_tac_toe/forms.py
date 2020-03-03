@@ -8,11 +8,11 @@ from . import config
 
 class NameForm(forms.Form):
     name = forms.CharField(
-        label='',
+        label="",
         max_length=config.MAX_NAME_LENGTH,
         widget=forms.TextInput(attrs={
-            'autofocus': 'autofocus',
-            'autocomplete': 'off',
-            'size': config.MAX_NAME_LENGTH,
-            'placeholder': 'Enter Name'
+            "autofocus": "autofocus",
+            "autocomplete": "off",
+            "size": config.MAX_NAME_LENGTH,
+            "placeholder": "Enter Name"
         }))
