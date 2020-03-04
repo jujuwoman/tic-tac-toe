@@ -12,42 +12,13 @@
 <!–- grid where player makes move -–>
 {% block grid %}
     {% include "tic_tac_toe/grid_active.html" %}
-
+    random cell id: {{ random_cell_id }}
 
     <script>
-        {# must match constant in config.py #}
-        const DEFAULT_COMPUTER_NAME = "Computer";
-
-        // Simulate click function
-        function click_cell(cell_id) {
-            document.querySelector(cell_id).click();
-        }
-
-
-
-
-
-
-
-        {# used by makeMoveViaAjax #}
-        function makeMark(mark, cell_id) {
-            let html = '<div id=mark></div>';
-            document.getElementById(cell_id).outerHTML = html.replace("mark", mark);
-        }
-
-        {# used by makeMoveViaAjax #}
-        function makePrompt(mark, name) {
-            let html = '<span id=mark></span>';
-            document.getElementById("prompt_name").innerHTML = name;
-            document.getElementById("prompt_mark").innerHTML = html.replace("mark", mark);
-        }
-
-        {# used by makeMoveViaAjax #}
-{#        function isComputer(name) {#}
-{#            if (name === DEFAULT_COMPUTER_NAME) {#}
-{#                let html = "test";#}
-{#            }#}
-{#        }#}
+        {# make random move if computer is first player #}
+        $(document).ready(function() {
+            $("#" + "{{ random_cell_id }}").trigger("click");
+        });
 
         {# handles player's move #}
         function makeMoveViaAjax(cell_id) {
@@ -89,6 +60,17 @@
                     alert("Error response :\n" + data);
                 }
             });
+        }
+
+        function makeMark(mark, cell_id) {
+            let html = '<div id=mark></div>';
+            document.getElementById(cell_id).outerHTML = html.replace("mark", mark);
+        }
+
+        function makePrompt(mark, name) {
+            let html = '<span id=mark></span>';
+            document.getElementById("prompt_name").innerHTML = name;
+            document.getElementById("prompt_mark").innerHTML = html.replace("mark", mark);
         }
     </script>
 {% endblock %}

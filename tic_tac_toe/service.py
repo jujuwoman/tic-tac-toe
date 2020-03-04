@@ -90,42 +90,13 @@ def initialize_game(request):
     request.session["next_player"] = request.session["second_player"]
 
 
-# used by initialize_game
-def get_name_by_order(order):
-    player = Players.objects.get(order=order)
-    name = player.name
-    return name
-
-
-# used by initialize_game
-def initialize_free_cells(request):
-    cells = list(request.session["map"].keys())
-    request.session["free_cells"] = json.dumps(cells)
-
-
-# used by views::index
-def initialize_map(request):
-    request.session["map"] = OrderedDict()
-    for i in range(config.N):
-        for j in range(config.N):
-            cell_id = "{}_{}".format(i, j)
-            request.session["map"][cell_id] = ""
-
-
-# used by views::make_move_via_ajax
-def update_free_cells(request, cell_id):
-    ls = json.loads(request.session["free_cells"])
-    ls.remove(cell_id)
-    request.session["free_cells"] = json.dumps(ls)
-
-
 # used by views::make_move_via_ajax
 def get_context_for_move(request, order, cell_id):
     players_model_object = get_players_model_object_by_order(order)
 
     # check terminating conditions
     # win
-    if if_win(players_model_object, cell_id):
+    if is_win(players_model_object, cell_id):
         request.session['result'] = "win"
         context = {
             "current_player": request.session["current_player"],
@@ -154,20 +125,60 @@ def get_context_for_move(request, order, cell_id):
     return context
 
 
-# used by get_context_for_move
+def initialize_map(request):
+    request.session["map"] = OrderedDict()
+    for i in range(config.N):
+        for j in range(config.N):
+            cell_id = "{}_{}".format(i, j)
+            request.session["map"][cell_id] = ""
+
+
+def initialize_free_cells(request):
+    ls = list(request.session["map"].keys())
+    request.session["free_cells"] = json.dumps(ls)
+
+
+def get_random_free_cell(request):
+    ls = get_free_cells_as_list(request)
+    cell_id = ls[randrange(len(ls))]
+    return cell_id
+
+# def pop_random_free_cell(request):
+#     ls = get_free_cells_as_list(request)
+#     cell_id = ls.pop(randrange(len(ls)))
+#     request.session["free_cells"] = json.dumps(ls)
+#     return cell_id
+
+
+def remove_free_cell(request, cell_id):
+    ls = get_free_cells_as_list(request)
+    ls.remove(cell_id)
+    request.session["free_cells"] = json.dumps(ls)
+
+
 def get_free_cells_as_list(request):
     ls = json.loads(request.session["free_cells"])
     return ls
 
 
-# used by get_context_for_move
+def get_name_by_order(order):
+    player = Players.objects.get(order=order)
+    name = player.name
+    return name
+
+
+def get_order_by_name(name):
+    player = Players.objects.get(name=name)
+    order = player.order
+    return order
+
+
 def get_players_model_object_by_order(order):
     player = Players.objects.get(order=order)
     return player
 
 
-# used by get_context_for_move
-def if_win(player, cell_id):
+def is_win(player, cell_id):
     [row, col] = list(map(int, cell_id.split("_")))
     player.rows[row] += 1
     player.cols[col] += 1

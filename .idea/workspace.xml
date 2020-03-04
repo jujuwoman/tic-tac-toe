@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="71567c3f-4022-4e8d-b5af-84902f5408dd" name="Default Changelist" comment="" />
+    <list default="true" id="71567c3f-4022-4e8d-b5af-84902f5408dd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/game_session.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/game_session.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -136,38 +138,38 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="37" y="235" key="EditFileWatcherDialog/0.0.1440.900@0.0.1440.900" timestamp="1582337512364" />
-    <state width="812" height="294" key="GridCell.Tab.0.bottom" timestamp="1583199120441">
+    <state width="886" height="294" key="GridCell.Tab.0.bottom" timestamp="1583294490603">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="812" height="294" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583199120441" />
-    <state width="812" height="294" key="GridCell.Tab.0.center" timestamp="1583199120440">
+    <state width="886" height="294" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583294490603" />
+    <state width="886" height="294" key="GridCell.Tab.0.center" timestamp="1583294490602">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="812" height="294" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1583199120440" />
-    <state width="812" height="294" key="GridCell.Tab.0.left" timestamp="1583199120439">
+    <state width="886" height="294" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1583294490602" />
+    <state width="886" height="294" key="GridCell.Tab.0.left" timestamp="1583294490602">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="812" height="294" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1583199120439" />
-    <state width="812" height="294" key="GridCell.Tab.0.right" timestamp="1583199120440">
+    <state width="886" height="294" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1583294490602" />
+    <state width="886" height="294" key="GridCell.Tab.0.right" timestamp="1583294490603">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="812" height="294" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1583199120440" />
-    <state width="812" height="294" key="GridCell.Tab.1.bottom" timestamp="1583199120443">
+    <state width="886" height="294" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1583294490603" />
+    <state width="886" height="294" key="GridCell.Tab.1.bottom" timestamp="1583294490605">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="812" height="294" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583199120443" />
-    <state width="812" height="294" key="GridCell.Tab.1.center" timestamp="1583199120442">
+    <state width="886" height="294" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583294490605" />
+    <state width="886" height="294" key="GridCell.Tab.1.center" timestamp="1583294490604">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="812" height="294" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1583199120442" />
-    <state width="812" height="294" key="GridCell.Tab.1.left" timestamp="1583199120441">
+    <state width="886" height="294" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1583294490604" />
+    <state width="886" height="294" key="GridCell.Tab.1.left" timestamp="1583294490603">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="812" height="294" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1583199120441" />
-    <state width="812" height="294" key="GridCell.Tab.1.right" timestamp="1583199120442">
+    <state width="886" height="294" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1583294490603" />
+    <state width="886" height="294" key="GridCell.Tab.1.right" timestamp="1583294490604">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="812" height="294" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1583199120442" />
+    <state width="886" height="294" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1583294490604" />
     <state width="239" height="457" key="HiddenNamespacesPopup" timestamp="1582521885321">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -176,10 +178,14 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="0" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1583017921719" />
-    <state x="122" y="85" width="683" height="729" key="find.popup" timestamp="1582510898457">
+    <state width="464" height="450" key="XDebugger.FullValuePopup" timestamp="1583293898725">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="122" y="85" width="683" height="729" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1582510898457" />
+    <state width="464" height="450" key="XDebugger.FullValuePopup/0.0.1440.900@0.0.1440.900" timestamp="1583293898725" />
+    <state x="122" y="85" width="683" height="729" key="find.popup" timestamp="1583291991626">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="122" y="85" width="683" height="729" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1583291991626" />
     <state x="129" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1583122814545">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
