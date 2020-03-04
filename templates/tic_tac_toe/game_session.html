@@ -12,13 +12,10 @@
 <!–- grid where player makes move -–>
 {% block grid %}
     {% include "tic_tac_toe/grid_active.html" %}
-    random cell id: {{ random_cell_id }}
 
     <script>
-        {# make random move if computer is first player #}
-        $(document).ready(function() {
-            $("#" + "{{ random_cell_id }}").trigger("click");
-        });
+        {# timer before computer makes move to facilitate a more natural experience #}
+        const DELAY_IN_MILLISECONDS = 300;
 
         {# handles player's move #}
         function makeMoveViaAjax(cell_id) {
@@ -39,21 +36,7 @@
                         window.location.href = "{% url 'game_over' %}";
                     } else {
                         makePrompt(data.next_player["mark"], data.next_player["name"]);
-
-                        {#if (data.next_player["name"] == "Computer") {#}
-                        {#    makeMoveViaAjax()#}
-                        {#}#}
-
-                        {#if (data.is_computer, or rahter whehter nxt player is computer) {#}
-                            {#timedelay? mebbe in python#}
-                        {#    makeMark(computer_mark, computer_move_cell_id)#}
-                        {#}#}
-                        {#OR!!;#}
-                        {#ask computer ot make ajax call#}
-
-
-
-
+                        makeComputerMove(data.random_cell_id);
                     }
                 },
                 error: function (data) {
@@ -72,6 +55,15 @@
             document.getElementById("prompt_name").innerHTML = name;
             document.getElementById("prompt_mark").innerHTML = html.replace("mark", mark);
         }
+
+        {# computer makes move if given unoccupied cell_id by random #}
+        function makeComputerMove(cell_id) {
+            setTimeout(function() {
+                $("#" + cell_id).trigger("click");
+            }, DELAY_IN_MILLISECONDS)
+        }
+
+        window.onload = makeComputerMove("{{ random_cell_id }}");
     </script>
 {% endblock %}
 

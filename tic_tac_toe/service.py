@@ -38,31 +38,34 @@ for displaying whose turn it is
 result (string):
 initialized in service.py
 stores game's terminating status ("", "win", or "draw")
+
+random_cell_id (string):
+initialized in service.py
+stores computer's randomly chosen move
 """
 
+import json
 from collections import OrderedDict
 from random import randrange
 from random import shuffle
-import json
-import time
 
 # -------------------------------------------------------- #
 # custom modules
 # -------------------------------------------------------- #
 from . import config
-from . models import Players
+from .models import Players
 
 
 # used by views::index
 def initialize_game(request):
-
     # initialize session data: free_cells, switch, result
     initialize_free_cells(request)
     request.session["switch"] = 0
     request.session["result"] = ""
 
     # randomize player order
-    name = request.POST["name"]
+    # player name will be case-insensitive
+    name = request.POST["name"].lower()
     player_names = [config.DEFAULT_COMPUTER_NAME, name]
     shuffle(player_names)
 
@@ -89,6 +92,12 @@ def initialize_game(request):
     request.session["current_player"] = request.session["first_player"]
     request.session["next_player"] = request.session["second_player"]
 
+    # initialize session data: random_cell_id
+    if first_player_name == config.DEFAULT_COMPUTER_NAME:
+        request.session['random_cell_id'] = get_random_free_cell(request)
+    else:
+        request.session['random_cell_id'] = ""
+
 
 # used by views::make_move_via_ajax
 def get_context_for_move(request, order, cell_id):
@@ -111,10 +120,14 @@ def get_context_for_move(request, order, cell_id):
         }
     # game in progress
     else:
+        # assign random move if computer is next player
+        update_random_cell_id(request, order)
+
         context = {
             "current_player": request.session["current_player"],
             "next_player": request.session["next_player"],
-            "result": request.session["result"]
+            "result": request.session["result"],
+            "random_cell_id": request.session["random_cell_id"]
         }
         # alternate players
         request.session["switch"] ^= 1
@@ -138,16 +151,24 @@ def initialize_free_cells(request):
     request.session["free_cells"] = json.dumps(ls)
 
 
+def update_random_cell_id(request, order):
+    current_player_name = get_name_by_order(order)
+    next_player_name = get_name_by_order(order ^ 1)
+    if current_player_name == config.DEFAULT_COMPUTER_NAME:
+        if next_player_name == config.DEFAULT_COMPUTER_NAME:
+            # allows computer to play against computer
+            request.session["random_cell_id"] = get_random_free_cell(request)
+        else:
+            # allows next human player to make move by choice
+            request.session["random_cell_id"] = ""
+    else:
+        request.session["random_cell_id"] = get_random_free_cell(request)
+
+
 def get_random_free_cell(request):
     ls = get_free_cells_as_list(request)
     cell_id = ls[randrange(len(ls))]
     return cell_id
-
-# def pop_random_free_cell(request):
-#     ls = get_free_cells_as_list(request)
-#     cell_id = ls.pop(randrange(len(ls)))
-#     request.session["free_cells"] = json.dumps(ls)
-#     return cell_id
 
 
 def remove_free_cell(request, cell_id):
@@ -167,12 +188,6 @@ def get_name_by_order(order):
     return name
 
 
-def get_order_by_name(name):
-    player = Players.objects.get(name=name)
-    order = player.order
-    return order
-
-
 def get_players_model_object_by_order(order):
     player = Players.objects.get(order=order)
     return player
@@ -190,4 +205,3 @@ def is_win(player, cell_id):
     tallies = {player.rows[row], player.cols[col], player.major, player.minor}
     if_win = config.N in tallies
     return if_win
-
