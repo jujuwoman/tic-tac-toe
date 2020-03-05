@@ -1,6 +1,5 @@
 <!–- base template -–>
 {% extends "tic_tac_toe/base.html" %}
-{% load static %}
 
 
 <!–- prompt message -–>
@@ -16,33 +15,37 @@
     <script>
         {# timer before computer makes move to facilitate a more natural experience #}
         const DELAY_IN_MILLISECONDS = 300;
+        let clickDisabled = false;
 
         {# handles player's move #}
         function makeMoveViaAjax(cell_id) {
-            $.ajax({
-                type: "POST",
-                url: "{% url 'make_move_via_ajax' %}",
-                headers: {
-                    "X-CSRFToken": "{{ csrf_token }}"
-                },
-                data: {
-                    "cell_id": cell_id
-                },
-                dataType: 'json',
-                success: function (data) {
-                    makeMark(data.current_player["mark"], cell_id);
+            if (clickDisabled) {}
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'make_move_via_ajax' %}",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    data: {
+                        "cell_id": cell_id
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        makeMark(data.current_player["mark"], cell_id);
 
-                    if (data.result) {
-                        window.location.href = "{% url 'game_over' %}";
-                    } else {
-                        makePrompt(data.next_player["mark"], data.next_player["name"]);
-                        makeComputerMove(data.random_cell_id);
+                        if (data.result) {
+                            window.location.href = "{% url 'game_over' %}";
+                        } else {
+                            makePrompt(data.next_player["mark"], data.next_player["name"]);
+                            makeComputerMove(data.random_cell_id);
+                        }
+                    },
+                    error: function (data) {
+                        alert("Error response :\n" + data);
                     }
-                },
-                error: function (data) {
-                    alert("Error response :\n" + data);
-                }
-            });
+                });
+            }
         }
 
         function makeMark(mark, cell_id) {
@@ -58,9 +61,13 @@
 
         {# computer makes move if given unoccupied cell_id by random #}
         function makeComputerMove(cell_id) {
-            setTimeout(function() {
-                $("#" + cell_id).trigger("click");
-            }, DELAY_IN_MILLISECONDS)
+            if (cell_id) {
+                clickDisabled = true;
+                setTimeout(function() {
+                    clickDisabled = false;
+                    $("#" + cell_id).trigger("click");
+                    }, DELAY_IN_MILLISECONDS)
+            }
         }
 
         window.onload = makeComputerMove("{{ random_cell_id }}");

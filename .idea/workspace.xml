@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71567c3f-4022-4e8d-b5af-84902f5408dd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/game_session.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/game_session.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +117,7 @@
       <workItem from="1582317644795" duration="156119000" />
       <workItem from="1583001685246" duration="61366000" />
       <workItem from="1583350760210" duration="28000" />
-      <workItem from="1583350796781" duration="20595000" />
+      <workItem from="1583350796781" duration="24911000" />
     </task>
     <servers />
   </component>

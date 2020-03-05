@@ -60,8 +60,6 @@ In classic tic-tac-toe, 2 players face off on a 3✕3 grid. I toyed with the ide
 
 - To have the computer play against itself, enter `computer` in the name field. 
 
-- A bug in the application allows a human player to switch the play order. During the computer's turn, a player can mark a cell before the computer's time delay is up, thereby bumping the computer to the next move.
-
 
 ## Extension Ideas
 - Incorporate new tools:
