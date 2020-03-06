@@ -39,6 +39,10 @@ result (string):
 initialized in service.py
 stores game's terminating status ("", "win", or "draw")
 
+moves (integer):
+initialized in service.py
+total number of moves made in a game
+
 random_cell_id (string):
 initialized in service.py
 stores computer's randomly chosen move
@@ -46,6 +50,7 @@ stores computer's randomly chosen move
 
 import json
 from collections import OrderedDict
+from datetime import datetime
 from random import randrange
 from random import shuffle
 
@@ -53,6 +58,7 @@ from random import shuffle
 # custom modules
 # -------------------------------------------------------- #
 from . import config
+from .models import History
 from .models import Players
 
 
@@ -62,6 +68,7 @@ def initialize_game(request):
     initialize_free_cells(request)
     request.session["switch"] = 0
     request.session["result"] = ""
+    request.session["moves"] = 0
 
     # randomize player order
     # player name will be case-insensitive
@@ -107,6 +114,7 @@ def get_context_for_move(request, order, cell_id):
     # win
     if is_win(players_model_object, cell_id):
         request.session['result'] = "win"
+        add_history_entry(request)
         context = {
             "current_player": request.session["current_player"],
             "result": request.session["result"]
@@ -114,6 +122,7 @@ def get_context_for_move(request, order, cell_id):
     # draw
     elif not get_free_cells_as_list(request):
         request.session["result"] = "draw"
+        add_history_entry(request)
         context = {
             "current_player": request.session["current_player"],
             "result": request.session["result"]
@@ -205,3 +214,18 @@ def is_win(player, cell_id):
     tallies = {player.rows[row], player.cols[col], player.major, player.minor}
     if_win = config.N in tallies
     return if_win
+
+
+def add_history_entry(request):
+    History.objects.create(human_player_name=request.session["current_player"]["name"],
+                           moves=request.session["moves"],
+                           result=request.session["result"],
+                           last_played=datetime.now())
+
+
+def history():
+    return {i: {"name": e.human_player_name,
+                "moves": e.moves,
+                "result": e.result,
+                "last_played": e.last_played}
+            for i, e in enumerate(History.objects.all())}

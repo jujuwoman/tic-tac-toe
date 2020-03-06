@@ -51,7 +51,8 @@ def game_over(request):
         "first_player": request.session["first_player"],
         "second_player": request.session["second_player"],
         "current_player": request.session["current_player"],
-        "result": request.session["result"]
+        "result": request.session["result"],
+        "history": service.history()
     }
     return render(request, "tic_tac_toe/game_over.html", context)
 
@@ -63,6 +64,7 @@ def game_over(request):
 def make_move_via_ajax(request):
     current_player_order = request.session["switch"]
     cell_id = request.POST["cell_id"]
+    request.session["moves"] += 1
 
     # update game state
     request.session["map"][cell_id] = config.MARKS[current_player_order]

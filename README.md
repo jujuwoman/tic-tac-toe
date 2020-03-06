@@ -27,6 +27,9 @@ Since querying a database via CLI can be laborious, a  database client that allo
 ## Run
 Once the player saves the `tic_tac_toe` application folder to their machine, they can run the game from an IDE that supports Django or from CLI. Since my IDE of choice is PyCharm, I've included the instructions for that particular IDE. If the IDE instructions fail, I've also included the instructions for CLI. Django automatically builds the application upon running. 
 
+In Terminal, change directory into `tic_tac_toe`. Initialize database by entering ```python3 manage.py makemigrations && python3 manage.py migrate```.
+
+
 ### PyCharm
 1. Start PyCharm and open project folder `tic_tac_toe`.
 2. Since the project was constructed with Python 3.7, it is likely the safest version to use. To choose Python 3.7 as the project interpreter, go to PyCharm > Preferences > Project: tic_tac_toe > Project Interpreter. Click on the gear ⚙ icon and choose Add... In the popup, highlight System Interpreter and select Python 3.7 in the dropdown menu. Hit OK. 
@@ -34,8 +37,7 @@ Once the player saves the `tic_tac_toe` application folder to their machine, the
 6. Visit Django's [development server](http://127.0.0.1:8000) in browser to play.
 
 ### CLI
-1. Fire up Terminal and change directory into `tic_tac_toe`.
-2. Enter `python3 manage.py runserver`. If port 8000 is already in use, free the port with `Control-C`.
+1. In Terminal, enter `python3 manage.py runserver` while in the `tic_tac_toe` directory. If port 8000 is already in use, free the port with `Control-C`.
 4. Visit Django's [development server](http://127.0.0.1:8000) in browser to play.
 
 
