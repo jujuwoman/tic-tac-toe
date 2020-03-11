@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71567c3f-4022-4e8d-b5af-84902f5408dd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/tic_tac_toe/history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tic_tac_toe/migrations/0013_players_human.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/game_over.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/game_over.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/tic_tac_toe/tic_tac_toe.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/tic_tac_toe/tic_tac_toe.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/history.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/history.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/result.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tic_tac_toe/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tic_tac_toe/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tic_tac_toe/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/tic_tac_toe/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tic_tac_toe/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tic_tac_toe/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +125,8 @@
       <workItem from="1583001685246" duration="61366000" />
       <workItem from="1583350760210" duration="28000" />
       <workItem from="1583350796781" duration="24911000" />
-      <workItem from="1583726585134" duration="5095000" />
+      <workItem from="1583726585134" duration="5445000" />
+      <workItem from="1583872960112" duration="13656000" />
     </task>
     <servers />
   </component>
@@ -138,10 +141,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="607" y="115" key="#Notifications/0.0.1440.900@0.0.1440.900" timestamp="1583351116413" />
-    <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583726604744">
+    <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583874124073">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1583726604744" />
+    <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1583874124073" />
     <state x="165" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583228788564">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -162,22 +165,22 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="589" y="254" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1583355174246" />
-    <state width="886" height="294" key="GridCell.Tab.0.bottom" timestamp="1583516014361">
+    <state width="1398" height="237" key="GridCell.Tab.0.bottom" timestamp="1583954460659">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="886" height="294" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583516014361" />
-    <state width="886" height="294" key="GridCell.Tab.0.center" timestamp="1583516014360">
+    <state width="1398" height="237" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583954460659" />
+    <state width="1398" height="237" key="GridCell.Tab.0.center" timestamp="1583954460658">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="886" height="294" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1583516014360" />
-    <state width="886" height="294" key="GridCell.Tab.0.left" timestamp="1583516014359">
+    <state width="1398" height="237" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1583954460658" />
+    <state width="1398" height="237" key="GridCell.Tab.0.left" timestamp="1583954460658">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="886" height="294" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1583516014359" />
-    <state width="886" height="294" key="GridCell.Tab.0.right" timestamp="1583516014361">
+    <state width="1398" height="237" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1583954460658" />
+    <state width="1398" height="237" key="GridCell.Tab.0.right" timestamp="1583954460659">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="886" height="294" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1583516014361" />
+    <state width="1398" height="237" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1583954460659" />
     <state width="886" height="294" key="GridCell.Tab.1.bottom" timestamp="1583516014362">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

@@ -1,7 +1,7 @@
-{% if result == "win" %}
+{% if result == "draw" %}
+    Draw!
+{% else %}
     <span id={{ current_player.mark }}></span>
     <span>{{ current_player.name }}</span>
     wins!
-{% else %}
-    Draw!
 {% endif %}

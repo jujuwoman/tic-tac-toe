@@ -71,15 +71,14 @@ def initialize_game(request):
     request.session["moves"] = 0
 
     # randomize player order
-    # player name will be case-insensitive
-    name = request.POST["name"].lower()
-    player_names = [config.DEFAULT_COMPUTER_NAME, name]
-    shuffle(player_names)
+    orders = [0, 1]
+    shuffle(orders)
 
     # initialize model: Players
+    # player names will be case-insensitive
     Players.objects.all().delete()
-    for i, e in enumerate(player_names):
-        Players.objects.create(order=i, name=e)
+    Players.objects.create(order=orders.pop(), name=request.POST["name"].lower(), human=True)
+    Players.objects.create(order=orders.pop(), name=config.DEFAULT_COMPUTER_NAME.lower())
 
     # initialize session data: first_player, second_player, current_player, next_player
     first_player_order = 0
@@ -88,13 +87,19 @@ def initialize_game(request):
     second_player_name = get_name_by_order(second_player_order)
     first_player_mark = config.MARKS[first_player_order]
     second_player_mark = config.MARKS[second_player_order]
+    first_player_human = get_human_by_order(first_player_order)
+    second_player_human = get_human_by_order(second_player_order)
     request.session["first_player"] = {
         "name": first_player_name,
-        "mark": first_player_mark
+        "order": first_player_order,
+        "mark": first_player_mark,
+        "human": first_player_human
     }
     request.session["second_player"] = {
         "name": second_player_name,
-        "mark": second_player_mark
+        "order": second_player_order,
+        "mark": second_player_mark,
+        "human": second_player_human
     }
     request.session["current_player"] = request.session["first_player"]
     request.session["next_player"] = request.session["second_player"]
@@ -196,6 +201,10 @@ def get_name_by_order(order):
     name = player.name
     return name
 
+def get_human_by_order(order):
+    player = Players.objects.get(order=order)
+    human = player.human
+    return human
 
 def get_players_model_object_by_order(order):
     player = Players.objects.get(order=order)
@@ -217,15 +226,25 @@ def is_win(player, cell_id):
 
 
 def add_history_entry(request):
-    History.objects.create(human_player_name=request.session["current_player"]["name"],
+    current_player = request.session["current_player"]
+    next_player = request.session["next_player"]
+    result = request.session["result"]
+    if current_player["human"]:
+        name = current_player["name"]
+    else:
+        name = next_player["name"]
+        if result != "draw":
+            result = "loss"
+    History.objects.create(name=name,
                            moves=request.session["moves"],
-                           result=request.session["result"],
-                           last_played=datetime.now())
+                           result=result,
+                           timestamp=datetime.now())
 
 
 def history():
-    return {i: {"name": e.human_player_name,
+    table = History.objects.all().order_by('-timestamp')[:50]
+    return {i: {"name": e.name,
                 "moves": e.moves,
                 "result": e.result,
-                "last_played": e.last_played}
-            for i, e in enumerate(History.objects.all())}
+                "timestamp": e.timestamp.strftime('%Y-%m-%d %H:%M:%S %Z')}
+            for i, e in enumerate(table)}

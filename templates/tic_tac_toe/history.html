@@ -1,4 +1,21 @@
 <H2>History</H2>
-{% for instance, stats in history.items %}
-    <div>Name: {{ stats.name }} &emsp; &emsp; Moves: {{ stats.moves }} &emsp; &emsp; Result: {{ stats.result }} &emsp; &emsp; Last Played: {{ stats.last_played }}</div>
-{% endfor %}
+{#{% for instance, stats in history.items %}#}
+{#    <div>Name: {{ stats.name }} &emsp; &emsp; Moves: {{ stats.moves }} &emsp; &emsp; Result: {{ stats.result }} &emsp; &emsp; Last Played: {{ stats.last_played }}</div>#}
+{#{% endfor %}#}
+
+<table width="700" cellspacing="0" cellpadding="0">
+    <tr>
+        <th width="200">Name</th>
+        <th width="100">Moves</th>
+        <th width="100">Result</th>
+        <th width="300">Timestamp</th>
+    </tr>
+    {% for instance, stats in history.items %}
+        <tr>
+            <td>{{ stats.name }}</td>
+            <td>{{ stats.moves }}</td>
+            <td>{{ stats.result }}</td>
+            <td>{{ stats.timestamp }}</td>
+        </tr>
+    {% endfor %}
+</table>
