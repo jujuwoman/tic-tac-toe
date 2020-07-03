@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71567c3f-4022-4e8d-b5af-84902f5408dd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tic_tac_toe/migrations/0013_players_human.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/tic_tac_toe/tic_tac_toe.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/tic_tac_toe/tic_tac_toe.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/history.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/history.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/tic_tac_toe/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tic_tac_toe/result.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tic_tac_toe/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tic_tac_toe/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tic_tac_toe/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/tic_tac_toe/service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +54,6 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
     <option name="sortByType" value="true" />
   </component>
@@ -127,100 +122,23 @@
       <workItem from="1583350796781" duration="24911000" />
       <workItem from="1583726585134" duration="5445000" />
       <workItem from="1583872960112" duration="13656000" />
+      <workItem from="1585965217040" duration="21000" />
+      <workItem from="1585965267210" duration="88000" />
+      <workItem from="1593790246473" duration="654000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="607" y="115" key="#Notifications" timestamp="1583351116413">
+    <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593790377699">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="607" y="115" key="#Notifications/0.0.1440.900@0.0.1440.900" timestamp="1583351116413" />
-    <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583874124073">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1583874124073" />
-    <state x="165" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583228788564">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="165" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1583228788564" />
-    <state x="179" y="160" key="#xdebugger.evaluate" timestamp="1582946590327">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="179" y="160" key="#xdebugger.evaluate/0.0.1440.900@0.0.1440.900" timestamp="1582946590327" />
-    <state x="47" y="52" key="CommitChangelistDialog2" timestamp="1583430439283">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="47" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1583430439283" />
-    <state x="37" y="235" key="EditFileWatcherDialog" timestamp="1582337512364">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="37" y="235" key="EditFileWatcherDialog/0.0.1440.900@0.0.1440.900" timestamp="1582337512364" />
-    <state x="589" y="254" key="FileChooserDialogImpl" timestamp="1583355174246">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="589" y="254" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1583355174246" />
-    <state width="1398" height="237" key="GridCell.Tab.0.bottom" timestamp="1583954460659">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1398" height="237" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583954460659" />
-    <state width="1398" height="237" key="GridCell.Tab.0.center" timestamp="1583954460658">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1398" height="237" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1583954460658" />
-    <state width="1398" height="237" key="GridCell.Tab.0.left" timestamp="1583954460658">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1398" height="237" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1583954460658" />
-    <state width="1398" height="237" key="GridCell.Tab.0.right" timestamp="1583954460659">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1398" height="237" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1583954460659" />
-    <state width="886" height="294" key="GridCell.Tab.1.bottom" timestamp="1583516014362">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="886" height="294" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583516014362" />
-    <state width="886" height="294" key="GridCell.Tab.1.center" timestamp="1583516014362">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="886" height="294" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1583516014362" />
-    <state width="886" height="294" key="GridCell.Tab.1.left" timestamp="1583516014361">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="886" height="294" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1583516014361" />
-    <state width="886" height="294" key="GridCell.Tab.1.right" timestamp="1583516014362">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="886" height="294" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1583516014362" />
-    <state width="239" height="457" key="HiddenNamespacesPopup" timestamp="1582521885321">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="239" height="457" key="HiddenNamespacesPopup/0.0.1440.900@0.0.1440.900" timestamp="1582521885321" />
-    <state x="443" y="89" key="SettingsEditor" timestamp="1583355672742">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="443" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1583355672742" />
-    <state width="464" height="450" key="XDebugger.FullValuePopup" timestamp="1583293898725">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="464" height="450" key="XDebugger.FullValuePopup/0.0.1440.900@0.0.1440.900" timestamp="1583293898725" />
-    <state x="122" y="85" width="683" height="729" key="find.popup" timestamp="1583313370546">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="122" y="85" width="683" height="729" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1583313370546" />
-    <state x="129" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1583122814545">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="129" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1583122814545" />
-    <state x="194" y="359" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1582922929567">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="194" y="359" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1440.900@0.0.1440.900" timestamp="1582922929567" />
+    <state x="320" y="115" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1593790377699" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

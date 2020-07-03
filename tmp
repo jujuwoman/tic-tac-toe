@@ -1,0 +1,151 @@
+CELL = "\t<div onclick=\"{}\" style=\"{}\" id=\"{}\"></div>"
+HTML = "<div class='grid' id=\"cells\">\n{}\n</div>"
+PATH = "templates/tic_tac_toe/grid.html"
+
+<!–- page displayed when game is in session -–>
+{% extends 'tic_tac_toe/index.html' %}
+{% block content %}
+    <h2>It's Player <span id="nextPlayer">0</span>'s turn.</h2>
+    <br>
+    <br>
+    <div class='grid'>
+        <div onclick="makeAjaxCall('cell1');" id='cell1'></div>
+        <div onclick="makeAjaxCall('cell2');" id='cell2'></div>
+        <div onclick="makeAjaxCall('cell3');" id='cell3'></div>
+        <div onclick="makeAjaxCall('cell4');" id='cell4'></div>
+        <div onclick="makeAjaxCall('cell5');" id='cell5'></div>
+        <div onclick="makeAjaxCall('cell6');" id='cell6'></div>
+        <div onclick="makeAjaxCall('cell7');" id='cell7'></div>
+        <div onclick="makeAjaxCall('cell8');" id='cell8'></div>
+        <div onclick="makeAjaxCall('cell9');" id='cell9'></div>
+    </div>
+
+    <br>
+    <div class='grid' id="cells">
+        <div onclick="makeAjaxCall('cell1');" id='cell1'></div>
+        <div onclick="makeAjaxCall('cell2');" id='cell2'></div>
+        <div onclick="makeAjaxCall('cell3');" id='cell3'></div>
+        <div onclick="makeAjaxCall('cell4');" id='cell4'></div>
+        <div onclick="makeAjaxCall('cell5');" id='cell5'></div>
+        <div onclick="makeAjaxCall('cell6');" id='cell6'></div>
+        <div onclick="makeAjaxCall('cell7');" id='cell7'></div>
+        <div onclick="makeAjaxCall('cell8');" id='cell8'></div>
+        <div onclick="makeAjaxCall('cell9');" id='cell9'></div>
+    </div>
+
+
+
+{#    {% for i in <div id='cells'></div> %}#}
+{#        {{ i }}#}
+{#    {% endfor %}#}
+
+    <div onclick="getDb()" id="db">DB</div>
+
+
+    <script>
+        var marks = ["cross", "circle"];
+
+
+
+        {# ------------------------------------------------ #}
+        {#$("#cells").change(function () {#}
+        {#    jQuery.ajax({#}
+        {#        type: "GET",#}
+        {#        url: "{% url 'getCellIds' %}",#}
+        {#        headers: {#}
+        {#            "X-CSRFToken": "{{ csrf_token }}"#}
+        {#        },#}
+        {#        success: function (data) {#}
+        {#            makeCells(data);#}
+        {#        },#}
+        {#        error: function (data) {#}
+        {#            alert("Error: Ajax call failed.");#}
+        {#        }#}
+        {#    });#}
+        {#}#}
+
+
+
+
+
+        {#function makeCell(rows, cols) {#}
+        {#    for (let i = 0; i < rows; i++) {#}
+        {#        for (let j = 0; j < cols; j++) {#}
+        {#            var cell = "".concat("row", i.toString(), "col", j.toString());#}
+        {#            document.write(cell);#}
+        {#        }#}
+        {#    }#}
+        {#    return cell;#}
+        {#}#}
+
+        {# ------------------------------------------------ #}
+        {#function makeCells(data) {#}
+        {#    document.getElementById("cells").innerHTML = data;#}
+        {#}#}
+        {##}
+        {#function cells() {#}
+        {#    jQuery.ajax({#}
+        {#        type: "GET",#}
+        {#        url: "{% url 'getCellIds' %}",#}
+        {#        headers: {#}
+        {#            "X-CSRFToken": "{{ csrf_token }}"#}
+        {#        },#}
+        {#        success: function (data) {#}
+        {#            makeCells(data);#}
+        {#        },#}
+        {#        error: function (data) {#}
+        {#            alert("Error: Ajax call failed.");#}
+        {#        }#}
+        {#    });#}
+        {#}#}
+
+
+
+        {# ------------------------------------------------ #}
+
+        function makeMark(playerId, cellId) {
+            var str = '<div id=mark></div>';
+            var mark = marks[playerId];
+            document.getElementById(cellId).outerHTML = str.replace('mark', mark);
+        }
+
+        function makePrompt(nextPlayer) {
+            document.getElementById("nextPlayer").innerHTML = nextPlayer;
+        }
+
+        function makeAjaxCall(cellId) {
+            jQuery.ajax({
+                type: "GET",
+                url: "{% url 'getCurrentPlayer' %}",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                success: function (data) {
+                    makeMark(data.currentPlayer, cellId);
+                    makePrompt(data.nextPlayer);
+                },
+                error: function (data) {
+                    alert("Error: Ajax call failed.");
+                }
+            });
+        }
+
+
+        {#function getDb() {#}
+        {#    jQuery.ajax({#}
+        {#        type: "GET",#}
+        {#        url: "{% url 'showModels' %}",#}
+        {#        headers: {#}
+        {#            "X-CSRFToken": "{{ csrf_token }}"#}
+        {#        },#}
+        {#        success: function (data) {#}
+        {#            jQuery("#db").html(data);#}
+        {#        },#}
+        {#        error: function (data) {#}
+        {#            alert('error');#}
+        {#            console.log("Error: Ajax call failed.");#}
+        {#        }#}
+        {#    });#}
+        {#}#}
+    </script>
+{% endblock %}
