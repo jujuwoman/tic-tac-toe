@@ -27,18 +27,37 @@ Since querying a database via CLI can be laborious, a  database client that allo
 ## Run
 Once the player saves the `tic_tac_toe` application folder to their machine, they can run the game from an IDE that supports Django or from CLI. Since my IDE of choice is PyCharm, I've included the instructions for that particular IDE. If the IDE instructions fail, I've also included the instructions for CLI. Django automatically builds the application upon running. 
 
-In Terminal, change directory into `tic_tac_toe`. Initialize database by entering ```python3 manage.py makemigrations && python3 manage.py migrate```.
+In Terminal, change directory into `tic_tac_toe`. Initialize database by entering:
+> `python3 manage.py makemigrations && python3 manage.py migrate`
 
+### PostgreSQL (Postgres)
+To start PostgreSQL server now and relaunch at login:
+> `brew services start postgresql`  
+> `brew services stop postgresql`   
+
+Or, if you don't need a background service you can just run:
+> `pg_ctl -D /usr/local/var/postgres start` 
+> `pg_ctl -D /usr/local/var/postgres stop`
+
+Getting Postgres to work may take some trial and error. Here some other useful commands:
+> `pg_ctl -D /usr/local/var/postgres start && brew services start postgresql`   
+> `python3 manage.py makemigrations tic_tac_toe; python3 manage.py migrate`
+
+Troubleshooting resources:
+* Command to locate `pg_hba.conf` and `postgresql.conf` ([Stackoverflow](https://stackoverflow.com/questions/33015471/cannot-find-pg-hba-conf-and-postgreql-conf-file-on-os-x)):
+    > `find / -iname "postgresql.conf" 2>/dev/null` 
+* Location of Postgres configuration file:
+    > `/usr/local/Cellar/postgresql/12.2/bin/pg_config`
 
 ### PyCharm
 1. Start PyCharm and open project folder `tic_tac_toe`.
 2. Since the project was constructed with Python 3.7, it is likely the safest version to use. To choose Python 3.7 as the project interpreter, go to PyCharm > Preferences > Project: tic_tac_toe > Project Interpreter. Click on the gear ⚙ icon and choose Add... In the popup, highlight System Interpreter and select Python 3.7 in the dropdown menu. Hit OK. 
 3. In the Navigation Bar (View > Appearance, check Navigation Bar) dropdown menu, select tic_tac_toe and click the adjacent Run button. If the run console indicates that port 8000 is already in use, free the port by entering `lsof -i :8000` in Terminal, copy the Python PID and enter `kill -9 <PID>`. Run the application via the Navigation Bar again.
-6. Visit Django's [development server](http://127.0.0.1:8000) in browser to play.
+6. Visit Django's [development server](http://127.0.0.1:8000) ([admin](http://127.0.0.1:8000/admin/) site) in browser to play.
 
 ### CLI
 1. In Terminal, enter `python3 manage.py runserver` while in the `tic_tac_toe` directory. If port 8000 is already in use, free the port with `Control-C`.
-4. Visit Django's [development server](http://127.0.0.1:8000) in browser to play.
+4. Visit Django's [development server](http://127.0.0.1:8000) ([admin](http://127.0.0.1:8000/admin/) site) in browser to play.
 
 
 ## Design
@@ -85,7 +104,6 @@ In classic tic-tac-toe, 2 players face off on a 3✕3 grid. I toyed with the ide
 Judy Wang  
 judywang@linkedin.com  
 https://www.linkedin.com/in/jujuwoman  
-https://github.com/jujuwoman 
+https://github.com/jujuwoman
 
-Last revised: March 4, 2020
 
