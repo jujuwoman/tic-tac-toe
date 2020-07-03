@@ -40,18 +40,15 @@ Or, if you don't need a background service you can just run:
 > `pg_ctl -D /usr/local/var/postgres stop`
 
 Getting Postgres to work with Django may take some trial and error. Here some other useful commands:
-> `pg_ctl -D /usr/local/var/postgres start && brew services start postgresql`   
-> `python3 manage.py makemigrations tic_tac_toe`    
-> `python3 manage.py makemigrations tic_tac_toe; python3 manage.py migrate`    
-> `python3 manage.py makemigrations && python3 manage.py migrate`   
-> `python3 manage.py runserver`    
-> `python3 manage.py startapp tic_tac_toe`    
-> `python3 manage.py migrate --fake`    
-
-python3 manage.py collectstatic --noinput --clear
-python3 manage.py collectstatic
-
-./manage.py test
+> `pg_ctl -D /usr/local/var/postgres start && brew services start postgresql`  
+> `python3 manage.py runserver`   
+> `python3 manage.py startapp tic_tac_toe`  
+> `python3 manage.py makemigrations tic_tac_toe`   
+> `python3 manage.py makemigrations tic_tac_toe; python3 manage.py migrate`   
+> `python3 manage.py makemigrations && python3 manage.py migrate`  
+> `python3 manage.py migrate --fake`   
+> `python3 manage.py collectstatic`   
+> `python3 manage.py collectstatic --noinput --clear`   
 
 Troubleshooting resources:
 * Command to locate `pg_hba.conf` and `postgresql.conf` ([Stackoverflow](https://stackoverflow.com/questions/33015471/cannot-find-pg-hba-conf-and-postgreql-conf-file-on-os-x)):
