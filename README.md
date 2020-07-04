@@ -108,8 +108,7 @@ In classic tic-tac-toe, 2 players face off on a 3✕3 grid. I toyed with the ide
 
 
 ---
-Judy Wang  
-judywang@linkedin.com  
+Judy Wang   
 https://www.linkedin.com/in/jujuwoman  
 https://github.com/jujuwoman
 
